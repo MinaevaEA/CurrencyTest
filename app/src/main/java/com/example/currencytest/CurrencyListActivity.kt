@@ -21,8 +21,5 @@ class CurrencyListActivity : AppCompatActivity(), CurrencyView {
         intent = Intent(this, CurrencyActivity::class.java)
         intent.putExtra("123", dataCurrency.title)
         startActivity(intent)
-        Log.d("11111", "11111")
-        Log.d("11111", "11111")
-        Log.d("11111", "11111")
     }
 }
