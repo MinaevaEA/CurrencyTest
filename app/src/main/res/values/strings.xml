@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">CurrencyTest</string>
+    <string name="btn_list_currency">Курс валют</string>
+    <string name="btn_operation">Мои операции</string>
+    <string name="title">Заголовок</string>
+    <string name="content">Контент</string>
+</resources>
