@@ -17,10 +17,11 @@ class AdapterCurrency(
         private val content: TextView = view.findViewById(R.id.content)
         private val currency: TextView = view.findViewById(R.id.currency)
 
-        fun bind(data: DataCurrency) {
+        fun bind(data: DataCurrency, clickListener: View.OnClickListener) {
             title.text = data.title
             content.text = data.content
             currency.text = data.currency.toString()
+            itemView.setOnClickListener(clickListener)
         }
     }
 
@@ -31,11 +32,8 @@ class AdapterCurrency(
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(dataSet[position])
-        holder.title.setOnClickListener {
-            Log.d("key", "value")
-            currencyAdapterListener.openCurrency(dataSet[position])
-        }
+        holder.bind(dataSet[position]){currencyAdapterListener.openCurrency(dataSet[position])}
+
     }
 
     override fun getItemCount() = dataSet.size

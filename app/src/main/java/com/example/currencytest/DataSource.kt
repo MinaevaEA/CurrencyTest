@@ -1,6 +1,10 @@
 package com.example.currencytest
 
-data class DataCurrency(val title: String, val content: String, val currency: Int)
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+
+@Parcelize
+data class DataCurrency(val title: String, val content: String, val currency: Int): Parcelable
 
 class DataSource {
     companion object {
