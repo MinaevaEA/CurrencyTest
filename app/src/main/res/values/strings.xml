@@ -4,5 +4,9 @@
     <string name="btn_operation">Мои операции</string>
     <string name="title">Заголовок</string>
     <string name="content">Контент</string>
-    <string name="splash">Добро пожаловать!</string>
+    <string name="authorization">Вход</string>
+    <string name="btn_input">Вход</string>
+    <string name="password">Введите пароль</string>
+    <string name="login">Телефон или E-mail!</string>
+
 </resources>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.navigation.NavigationView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    android:layout_height="wrap_content"
+    android:layout_width="wrap_content">
+
+    <fragment
+        android:id="@+id/accountFragment"
+        android:label="Account"
+        tools:layout="@layout/list_currency"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"/>
+
+    <fragment
+        android:id="@+id/favouritesFragment"
+        android:label="Favourites"
+        tools:layout="@layout/list_currency"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"/>
+
+    <fragment
+        android:id="@+id/albumsFragment"
+        android:label="Albums"
+        tools:layout="@layout/activity_main"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"/>
+
+</com.google.android.material.navigation.NavigationView>

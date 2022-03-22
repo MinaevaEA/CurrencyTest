@@ -8,8 +8,17 @@
         <entry key="..\:/Users/Evgenia/AndroidStudioProjects/CurrencyTest/app/src/main/res/layout/activity_currency.xml" value="0.2" />
         <entry key="..\:/Users/Evgenia/AndroidStudioProjects/CurrencyTest/app/src/main/res/layout/activity_main.xml" value="0.264" />
         <entry key="..\:/Users/Evgenia/AndroidStudioProjects/CurrencyTest/app/src/main/res/layout/list_currency.xml" value="0.2" />
-        <entry key="..\:/Users/Evgenia/AndroidStudioProjects/CurrencyTestApp/CurrencyTest/app/src/main/res/layout/activity_about_currency.xml" value="0.1796875" />
+        <entry key="..\:/Users/Evgenia/AndroidStudioProjects/CurrencyTestApp/CurrencyTest/app/src/main/res/layout/activity_about_currency.xml" value="0.4" />
+        <entry key="..\:/Users/Evgenia/AndroidStudioProjects/CurrencyTestApp/CurrencyTest/app/src/main/res/layout/activity_buy_currency_list.xml" value="0.25" />
+        <entry key="..\:/Users/Evgenia/AndroidStudioProjects/CurrencyTestApp/CurrencyTest/app/src/main/res/layout/activity_currency.xml" value="0.1859375" />
+        <entry key="..\:/Users/Evgenia/AndroidStudioProjects/CurrencyTestApp/CurrencyTest/app/src/main/res/layout/activity_main.xml" value="0.264" />
+        <entry key="..\:/Users/Evgenia/AndroidStudioProjects/CurrencyTestApp/CurrencyTest/app/src/main/res/layout/activity_registration.xml" value="0.264" />
         <entry key="..\:/Users/Evgenia/AndroidStudioProjects/CurrencyTestApp/CurrencyTest/app/src/main/res/layout/activity_splash_one.xml" value="0.264" />
+        <entry key="..\:/Users/Evgenia/AndroidStudioProjects/CurrencyTestApp/CurrencyTest/app/src/main/res/layout/list_buy_currency.xml" value="0.4" />
+        <entry key="..\:/Users/Evgenia/AndroidStudioProjects/CurrencyTestApp/CurrencyTest/app/src/main/res/layout/list_currency.xml" value="0.536" />
+        <entry key="..\:/Users/Evgenia/AndroidStudioProjects/CurrencyTestApp/CurrencyTest/app/src/main/res/layout/list_currency2.xml" value="0.4" />
+        <entry key="..\:/Users/Evgenia/AndroidStudioProjects/CurrencyTestApp/CurrencyTest/app/src/main/res/layout/menu_bottom_nsv.xml" value="0.1" />
+        <entry key="..\:/Users/Evgenia/AndroidStudioProjects/CurrencyTestApp/CurrencyTest/app/src/main/res/layout/nav_graph.xml" value="0.1" />
         <entry key="..\:/Users/Evgenia/AndroidStudioProjects/CurrencyTestApp/CurrencyTest/app/src/main/res/layout/test2.xml" value="0.12708333333333333" />
       </map>
     </option>
@@ -19,5 +28,12 @@
   </component>
   <component name="ProjectType">
     <option name="id" value="Android" />
+  </component>
+  <component name="VisualizationToolProject">
+    <option name="state">
+      <ProjectState>
+        <option name="scale" value="0.1859375" />
+      </ProjectState>
+    </option>
   </component>
 </project>

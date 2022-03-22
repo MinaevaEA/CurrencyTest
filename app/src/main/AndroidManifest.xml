@@ -3,6 +3,7 @@
     package="com.example.currencytest">
 
     <application
+        android:name=".list.SubApplication"
         android:allowBackup="true"
         android:fullBackupOnly="true"
         android:icon="@mipmap/ic_launcher"
@@ -10,6 +11,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.CurrencyTest">
+        <activity
+            android:name=".currency.BuyCurrencyListActivity"
+            android:exported="false" />
+        <activity
+            android:name=".Registration"
+            android:exported="false" />
         <activity
             android:name=".SplashActivityOne"
             android:exported="true"
@@ -20,8 +27,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".CurrencyListActivity" />
-        <activity android:name=".CurrencyActivity" />
+        <activity android:name=".list.CurrencyListActivity" />
+        <activity android:name=".list.CurrencyActivity" />
         <activity
             android:name=".MainActivity"
             android:exported="true" />
