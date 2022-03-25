@@ -51,14 +51,14 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.56"
-        app:layout_constraintStart_toEndOf="@+id/editTextNumber"
+        app:layout_constraintStart_toEndOf="@+id/numberOfBuy"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.27"
         app:srcCompat="@android:drawable/ic_menu_add"
         tools:ignore="ContentDescription,MissingConstraints,SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
     <EditText
-        android:id="@+id/editTextNumber"
+        android:id="@+id/numberOfBuy"
         android:layout_width="91dp"
         android:layout_height="45dp"
         android:layout_marginStart="68dp"

@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.PersistableBundle
 import android.util.Log
+import android.widget.Toast
 import com.example.currencytest.currency.DataBuyCurrency
 import com.example.currencytest.databinding.ActivityAboutCurrencyBinding
 
@@ -17,21 +18,21 @@ class CurrencyActivity : AppCompatActivity() {
         setContentView(binding.root)
         val dataBase = (applicationContext as SubApplication).provideDataBase()
         val info = intent.getParcelableExtra<DataCurrency>(TAG_FOR_CURRENCY)
+
         binding.title.text = info?.title
         binding.content.text = info?.price.toString()
         binding.currency.text = info?.number.toString()
-        binding.buyButton.setOnClickListener {
-            val buyCurrency = info?.let {
-                DataBuyCurrency(
-                    title = info.title,
-                    price = info.price,
-                    number = info.number
-                )
-            }
-            if (buyCurrency != null) {
-                dataBase.addDataBuyCurrency(buyCurrency)
-            }
 
+        binding.buyButton.setOnClickListener {
+            val numberOfBuy = binding.numberOfBuy.text.toString().toIntOrNull() ?: 0
+            val price = binding.content.text.toString().toDoubleOrNull() ?: 0.0
+            Toast.makeText(applicationContext,"Покупка произведена!",Toast.LENGTH_SHORT).show()
+            val buyCurrency = DataBuyCurrency(
+                title = info?.title ?: " ",
+                price = info?.price ?: 0.0,
+                number = numberOfBuy, generalSumm = price * numberOfBuy.toDouble()
+            )
+            dataBase.addDataBuyCurrency(buyCurrency)
         }
         Log.d("2", "onCreate")
     }

@@ -18,6 +18,7 @@ class AdapterBuyCurrency(
             binding.title.text = data.title
             binding.price.text = data.price.toString()
             binding.number.text = data.number.toString()
+            binding.generalCurrency.text = data.generalSumm.toString()
         }
     }
 
