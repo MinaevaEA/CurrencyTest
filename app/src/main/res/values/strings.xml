@@ -8,5 +8,7 @@
     <string name="btn_input">Вход</string>
     <string name="password">Введите пароль</string>
     <string name="login">Телефон или E-mail!</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

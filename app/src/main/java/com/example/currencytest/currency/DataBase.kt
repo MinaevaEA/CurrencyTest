@@ -7,17 +7,15 @@ import kotlinx.parcelize.Parcelize
 @Parcelize
 data class DataBuyCurrency(
     var title: String,
-    val price: Double,
+    val price: String,
     val number: Int = 0,
+    val date : String,
     val generalSumm: Double? = 0.0
 ) : Parcelable
 
 class DataBase {
     private val dataBaseList = mutableListOf(
-        DataBuyCurrency("EUR", 103.9524),
-        DataBuyCurrency("USD", 120.3996),
-        DataBuyCurrency("EUR", 110.9524),
-        DataBuyCurrency("USD", 114.3996)
+        DataBuyCurrency("", "Russia",0,"")
     )
 
     fun addDataBuyCurrency(data: DataBuyCurrency) {

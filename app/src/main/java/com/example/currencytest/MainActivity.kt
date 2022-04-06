@@ -1,12 +1,11 @@
 package com.example.currencytest
 
-import android.content.Context
-import android.content.Intent
+
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.example.currencytest.currency.BuyCurrencyListActivity
+import android.util.Log
 import com.example.currencytest.databinding.ActivityMainBinding
-import com.example.currencytest.list.CurrencyListActivity
+
 
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
@@ -14,18 +13,36 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        binding.btnCurrency.setOnClickListener {
-            val intent = CurrencyListActivity.getIntent(this)
-            startActivity(intent)
-            //TODO (соблюсти инкапсуляцию через getIntent)
-        }
-        binding.buy.setOnClickListener {
-            val intent = Intent(this, BuyCurrencyListActivity::class.java)
-            startActivity(intent)
+        if (savedInstanceState == null) {
+            supportFragmentManager.beginTransaction()
+                .addToBackStack(null)
+                .replace(R.id.activity_main, RegistrationFragment.newInstance())
+                .commit()
         }
     }
 
-    companion object {
-        fun getIntent(context: Context): Intent = Intent(context, MainActivity::class.java)
+    override fun onStart() {
+        super.onStart()
+        Log.d("act","onStart-act")
+    }
+
+    override fun onResume() {
+        super.onResume()
+        Log.d("act","onResume-act")
+    }
+
+    override fun onPause() {
+        super.onPause()
+        Log.d("act","onPause-act")
+    }
+
+    override fun onStop() {
+        super.onStop()
+        Log.d("act","onStop-act")
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        Log.d("act","onDestroy-act")
     }
 }

@@ -1,6 +1,7 @@
 package com.example.currencytest
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.animation.AnimationUtils
@@ -20,10 +21,9 @@ class SplashActivityOne : AppCompatActivity() {
         binding.ivNote.startAnimation(sideAnimation)
         val timer = Timer()
         timer.schedule(timerTask {
-            val intent = Registration.getIntent(applicationContext)
+            val intent = Intent(applicationContext, MainActivity::class.java)
             startActivity(intent)
+            finish()
         }, 4000)
-        // TODO (заменить на таймер)
-
     }
 }

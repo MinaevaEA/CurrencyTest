@@ -12,11 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CurrencyTest">
         <activity
-            android:name=".currency.BuyCurrencyListActivity"
+            android:name=".currency.BuyCurrencyListFragment"
             android:exported="false" />
-        <activity
-            android:name=".Registration"
-            android:exported="false" />
+
         <activity
             android:name=".SplashActivityOne"
             android:exported="true"
@@ -27,8 +25,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".list.CurrencyListActivity" />
-        <activity android:name=".list.CurrencyActivity" />
+
+        <activity android:name=".list.CurrencyFragment" />
         <activity
             android:name=".MainActivity"
             android:exported="true" />

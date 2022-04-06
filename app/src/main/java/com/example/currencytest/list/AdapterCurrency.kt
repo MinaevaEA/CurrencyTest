@@ -4,8 +4,8 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewbinding.ViewBinding
-import com.example.currencytest.databinding.ListCurrency2Binding
-import com.example.currencytest.databinding.ListCurrencyBinding
+import com.example.currencytest.databinding.ListCurrencyItem2Binding
+import com.example.currencytest.databinding.ListCurrencyItemBinding
 
 
 class AdapterCurrency(
@@ -20,30 +20,30 @@ class AdapterCurrency(
         abstract fun bind(data: DataCurrency)
     }
 
-    class View1ViewHolder(private val binding: ListCurrencyBinding) : BaseHolder(binding) {
+    class View1ViewHolder(private val binding: ListCurrencyItemBinding) : BaseHolder(binding) {
         override fun bind(data: DataCurrency) {
-            binding.title.text = data.title
-            binding.price.text = data.price.toString()
-            binding.number.text = data.number.toString()
+            binding.title.text = data.valute
+            binding.price.text = data.country.toString()
+          //  binding.number.text = data.number.toString()
 
         }
     }
 
-    class View2ViewHolder(private val binding: ListCurrency2Binding) : BaseHolder(binding) {
+    class View2ViewHolder(private val binding: ListCurrencyItem2Binding) : BaseHolder(binding) {
         override fun bind(data: DataCurrency) {
-            binding.title.text = data.title
-            binding.price.text = data.price.toString()
-            binding.number.text = data.number.toString()
+            binding.title.text = data.valute
+            binding.price.text = data.country.toString()
+          //  binding.number.text = data.number.toString()
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
         if (viewType == VIEW_TYPE_ONE) {
-            val binding = ListCurrencyBinding.inflate(layoutInflater, parent, false)
+            val binding = ListCurrencyItemBinding.inflate(layoutInflater, parent, false)
             return View1ViewHolder(binding)
         }
-        val binding = ListCurrency2Binding.inflate(layoutInflater, parent, false)
+        val binding = ListCurrencyItem2Binding.inflate(layoutInflater, parent, false)
         return View2ViewHolder(binding)
     }
 
@@ -55,7 +55,7 @@ class AdapterCurrency(
         }
 
         holder.itemView.setOnClickListener {
-            currencyAdapterListener.openCurrency(dataSet[position])
+            currencyAdapterListener.openCurrency(dataSet[position].valute)
         }
     }
 
@@ -74,4 +74,3 @@ class AdapterCurrency(
         const val VIEW_TYPE_TWO = 2
     }
 }
-//TODO (сделать разметку у четных и нечетных холдеров разные)

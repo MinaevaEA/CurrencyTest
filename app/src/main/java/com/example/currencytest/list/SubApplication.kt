@@ -13,11 +13,13 @@ class SubApplication : Application() {
         dataBase = DataBase()
     }
 
+    //иммитация API(удаленного источника данных)
     fun provideDataSource(): DataSource {
         return dataSource
 
     }
-    fun provideDataBase(): DataBase{
+    //иммитация Базы данных(бд записывает только в кэш)
+    fun provideDataBase(): DataBase {
         return dataBase
     }
 
