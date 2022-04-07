@@ -13,7 +13,7 @@ data class DataBuyCurrency(
     val generalSumm: Double? = 0.0
 ) : Parcelable
 
-class DataBase {
+class DataBase1 {
     private val dataBaseList = mutableListOf(
         DataBuyCurrency("", "Russia",0,"")
     )

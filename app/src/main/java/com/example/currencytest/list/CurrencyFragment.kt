@@ -6,9 +6,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import com.example.currencytest.currency.DataBuyCurrency
+import androidx.lifecycle.lifecycleScope
+
 
 import com.example.currencytest.databinding.FragmentAboutCurrencyBinding
+import com.example.currencytest.db.Currency
+import kotlinx.coroutines.launch
 
 class CurrencyFragment : Fragment() {
     private lateinit var binding: FragmentAboutCurrencyBinding
@@ -21,8 +24,7 @@ class CurrencyFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val dataBase = (requireContext().applicationContext as SubApplication).provideDataBase()
-        //val info = arguments?.getParcelable<DataCurrency>(TAG_FOR_CURRENCY)
+        val dataBase = (requireContext().applicationContext as SubApplication).provideDataBase().currencyDao()
         val currency = arguments?.getString(TAG_FOR_CURRENCY,"")?: ""
         val price = (requireContext().applicationContext as SubApplication).provideDataSource().getDataCurrencyNumber(currency).price
         val date = (requireContext().applicationContext as SubApplication).provideDataSource().getDataCurrencyNumber(currency).date
@@ -35,13 +37,15 @@ class CurrencyFragment : Fragment() {
             val numberOfBuy = binding.numberOfBuy.text.toString().toIntOrNull() ?: 0
             val price = binding.price.text.toString().toDoubleOrNull() ?: 0.0
             Toast.makeText(requireContext(), "Покупка произведена!", Toast.LENGTH_SHORT).show()
-            val buyCurrency = DataBuyCurrency(
-                title = title.toString() ?: " ",
-                price = price.toString() ?: " ",
+            lifecycleScope.launch {
+            val buyCurrency = Currency(
+                title = title.toString(),
+                price = price.toString(),
                 date = date.toString(),
                 number = numberOfBuy, generalSumm = price * numberOfBuy.toDouble()
             )
-            dataBase.addDataBuyCurrency(buyCurrency)
+                dataBase.insertAll(buyCurrency)
+            }
         }
     }
 

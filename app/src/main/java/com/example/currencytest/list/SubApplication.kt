@@ -1,16 +1,20 @@
 package com.example.currencytest.list
 
 import android.app.Application
-import com.example.currencytest.currency.DataBase
+import androidx.room.Room
+import com.example.currencytest.db.AppDatabase
 
 
 class SubApplication : Application() {
     private lateinit var dataSource: DataSource
-    private lateinit var dataBase: DataBase
+    private lateinit var dataBase: AppDatabase
     override fun onCreate() {
         super.onCreate()
         dataSource = DataSource()
-        dataBase = DataBase()
+        dataBase = Room.databaseBuilder(
+            this,
+            AppDatabase::class.java, "database-name"
+        ).build()
     }
 
     //иммитация API(удаленного источника данных)
@@ -19,7 +23,7 @@ class SubApplication : Application() {
 
     }
     //иммитация Базы данных(бд записывает только в кэш)
-    fun provideDataBase(): DataBase {
+    fun provideDataBase(): AppDatabase {
         return dataBase
     }
 
