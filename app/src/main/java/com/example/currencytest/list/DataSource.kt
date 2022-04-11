@@ -7,6 +7,8 @@ import java.util.ArrayList
 @Parcelize
 data class DataCurrency(val valute: String, val country: String?) : Parcelable
 
+data class CurrencyDetail(val date: String, val rub: Double)
+
 @Parcelize
 data class DataCurrencyNumber(val date: String?, val price: Double?) : Parcelable
 

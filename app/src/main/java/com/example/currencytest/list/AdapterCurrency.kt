@@ -6,13 +6,19 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.viewbinding.ViewBinding
 import com.example.currencytest.databinding.ListCurrencyItem2Binding
 import com.example.currencytest.databinding.ListCurrencyItemBinding
+import java.util.ArrayList
 
 
 class AdapterCurrency(
-    private var dataSet: List<DataCurrency>,
     private val currencyAdapterListener: CurrencyViewListener
 ) :
     RecyclerView.Adapter<AdapterCurrency.BaseHolder>() {
+    private var dataSet = ArrayList<DataCurrency>()
+    fun setData(newList: List<DataCurrency>) {
+        dataSet.clear()
+        dataSet = newList as ArrayList<DataCurrency>
+        notifyDataSetChanged()
+    }
 
     abstract class BaseHolder(binding: ViewBinding) :
         RecyclerView.ViewHolder(binding.root) {
@@ -20,11 +26,12 @@ class AdapterCurrency(
         abstract fun bind(data: DataCurrency)
     }
 
+    //TODO добавить прогресс бар , сделать несколько состояний экрана.
     class View1ViewHolder(private val binding: ListCurrencyItemBinding) : BaseHolder(binding) {
         override fun bind(data: DataCurrency) {
             binding.title.text = data.valute
             binding.price.text = data.country.toString()
-          //  binding.number.text = data.number.toString()
+            //  binding.number.text = data.number.toString()
 
         }
     }
@@ -33,7 +40,7 @@ class AdapterCurrency(
         override fun bind(data: DataCurrency) {
             binding.title.text = data.valute
             binding.price.text = data.country.toString()
-          //  binding.number.text = data.number.toString()
+            //  binding.number.text = data.number.toString()
         }
     }
 
