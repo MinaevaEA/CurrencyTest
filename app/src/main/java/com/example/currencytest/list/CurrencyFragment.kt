@@ -1,19 +1,21 @@
 package com.example.currencytest.list
 
+
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.OnClickListener
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
-
-
+import com.example.currencytest.MainFragment
+import com.example.currencytest.R
 import com.example.currencytest.databinding.FragmentAboutCurrencyBinding
 import com.example.currencytest.db.Currency
 import com.example.currencytest.retrofit.Currency.retrofitService
 import com.example.currencytest.retrofit.RetrofitServices
+import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
@@ -56,7 +58,13 @@ class CurrencyFragment : Fragment() {
             val numberOfBuy = binding.numberOfBuy.text.toString().toIntOrNull() ?: 0
             val price = binding.price.text.toString().toDoubleOrNull() ?: 0.0
             val date = binding.date
-            Toast.makeText(requireContext(), "Покупка произведена!", Toast.LENGTH_SHORT).show()
+            Snackbar.make(it,"Покупка произведена!",Snackbar.LENGTH_LONG)
+                .setAction("Вернуться в меню", OnClickListener {
+                requireActivity().supportFragmentManager.beginTransaction()
+                    .addToBackStack(null)
+                    .replace(R.id.activity_main, MainFragment.newInstance())
+                    .commit()
+            }).show()
             lifecycleScope.launch {
                 val buyCurrency = Currency(
                     title = title.toString(),
@@ -66,6 +74,8 @@ class CurrencyFragment : Fragment() {
                 )
                 dataBase.insertAll(buyCurrency)
             }
+
+
         }
     }
 
