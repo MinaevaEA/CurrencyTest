@@ -14,7 +14,6 @@ import com.example.currencytest.databinding.FragmentAboutCurrencyBinding
 import com.example.currencytest.db.Currency
 import com.example.currencytest.retrofit.Currency.retrofitService
 import com.example.currencytest.retrofit.RetrofitServices
-import com.google.gson.JsonObject
 import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
@@ -45,12 +44,12 @@ class CurrencyFragment : Fragment() {
                 Log.d("3", "DataCurrency ${response.body()}")
                 binding.price.text = response.body()?.rub.toString()
                 binding.date.text = response.body()?.date
+                successLoadingCurrency()
             }
 
             override fun onFailure(call: Call<CurrencyDetail>, t: Throwable) {
-                TODO("Not yet implemented")
+                errorLoadingCurrency()
             }
-
         })
         binding.buyButton.setOnClickListener {
             val title = binding.title.text
@@ -59,16 +58,29 @@ class CurrencyFragment : Fragment() {
             val date = binding.date
             Toast.makeText(requireContext(), "Покупка произведена!", Toast.LENGTH_SHORT).show()
             lifecycleScope.launch {
-                        val buyCurrency = Currency(
-                            title = title.toString(),
-                            price = price.toString(),
-                            date = date.toString(),
-                            number = numberOfBuy, generalSumm = price * numberOfBuy.toDouble()
-                        )
-                        dataBase.insertAll(buyCurrency)
+                val buyCurrency = Currency(
+                    title = title.toString(),
+                    price = price.toString(),
+                    date = date.toString(),
+                    number = numberOfBuy, generalSumm = price * numberOfBuy.toDouble()
+                )
+                dataBase.insertAll(buyCurrency)
             }
         }
+    }
 
+    fun successLoadingCurrency() {
+        binding.progressBar.visibility = View.INVISIBLE
+        binding.price.visibility = View.VISIBLE
+        binding.date.visibility = View.VISIBLE
+        binding.title.visibility = View.VISIBLE
+        binding.numberOfBuy.visibility = View.VISIBLE
+        binding.buyButton.visibility = View.VISIBLE
+    }
+
+    fun errorLoadingCurrency() {
+        binding.progressBar.visibility = View.INVISIBLE
+        binding.errorMsg.visibility = View.VISIBLE
     }
 
     companion object {

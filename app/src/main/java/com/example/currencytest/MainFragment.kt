@@ -11,7 +11,7 @@ import com.example.currencytest.currency.BuyCurrencyListFragment
 import com.example.currencytest.databinding.FragmentMainBinding
 import com.example.currencytest.list.CurrencyListFragment
 import com.example.currencytest.retrofit.Currency
-import com.example.currencytest.retrofit.RecponseTest2
+import com.example.currencytest.retrofit.ResponseTest
 import com.example.currencytest.retrofit.RetrofitServices
 import com.google.gson.Gson
 import com.google.gson.JsonObject
@@ -58,7 +58,7 @@ class MainFragment : Fragment() {
                     val gson = Gson()
                     val i = object : TypeToken<Map<String, String>>() {}.type
                     val list: Map<String, String> = gson.fromJson(response.body(), i)
-                    val list2 = list.map { i-> RecponseTest2(i.key,i.value)}
+                    val list2 = list.map { i-> ResponseTest(i.key,i.value)}
                     Log.d("main", "${list2}")
                 }
 

@@ -1,5 +1,6 @@
 package com.example.currencytest.list
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -14,6 +15,7 @@ class AdapterCurrency(
 ) :
     RecyclerView.Adapter<AdapterCurrency.BaseHolder>() {
     private var dataSet = ArrayList<DataCurrency>()
+    @SuppressLint("NotifyDataSetChanged")
     fun setData(newList: List<DataCurrency>) {
         dataSet.clear()
         dataSet = newList as ArrayList<DataCurrency>
@@ -26,13 +28,10 @@ class AdapterCurrency(
         abstract fun bind(data: DataCurrency)
     }
 
-    //TODO добавить прогресс бар , сделать несколько состояний экрана.
     class View1ViewHolder(private val binding: ListCurrencyItemBinding) : BaseHolder(binding) {
         override fun bind(data: DataCurrency) {
             binding.title.text = data.valute
             binding.price.text = data.country.toString()
-            //  binding.number.text = data.number.toString()
-
         }
     }
 
@@ -40,7 +39,6 @@ class AdapterCurrency(
         override fun bind(data: DataCurrency) {
             binding.title.text = data.valute
             binding.price.text = data.country.toString()
-            //  binding.number.text = data.number.toString()
         }
     }
 
