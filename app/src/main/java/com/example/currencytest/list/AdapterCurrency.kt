@@ -1,6 +1,7 @@
 package com.example.currencytest.list
 
 import android.annotation.SuppressLint
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -20,6 +21,7 @@ class AdapterCurrency(
         dataSet.clear()
         dataSet = newList as ArrayList<DataCurrency>
         notifyDataSetChanged()
+        Log.d("4444444", "setData")
     }
 
     abstract class BaseHolder(binding: ViewBinding) :
@@ -58,6 +60,7 @@ class AdapterCurrency(
         } else if (holder is View2ViewHolder) {
             holder.bind(dataSet[position])
         }
+        Log.d("4444444", "onBindViewHolder")
 
         holder.itemView.setOnClickListener {
             currencyAdapterListener.openCurrency(dataSet[position].valute)

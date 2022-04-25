@@ -13,13 +13,13 @@ import com.example.currencytest.MainFragment
 import com.example.currencytest.R
 import com.example.currencytest.databinding.FragmentAboutCurrencyBinding
 import com.example.currencytest.db.Currency
-import com.example.currencytest.retrofit.Currency.retrofitService
 import com.example.currencytest.retrofit.RetrofitServices
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.launch
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import retrofit2.create
 
 class CurrencyFragment : Fragment() {
     private lateinit var binding: FragmentAboutCurrencyBinding
@@ -36,7 +36,7 @@ class CurrencyFragment : Fragment() {
         val dataBase =
             (requireContext().applicationContext as SubApplication).provideDataBase().currencyDao()
         val currency = arguments?.getString(TAG_FOR_CURRENCY, "") ?: ""
-        mService = retrofitService
+        mService =  (requireContext().applicationContext as SubApplication).provideDataFromNetwork().create()
         binding.title.text = currency
         mService.getConcreteCurrency(currency).enqueue(object : Callback<CurrencyDetail> {
             override fun onResponse(
@@ -46,7 +46,11 @@ class CurrencyFragment : Fragment() {
                 Log.d("3", "DataCurrency ${response.body()}")
                 binding.price.text = response.body()?.rub.toString()
                 binding.date.text = response.body()?.date
-                successLoadingCurrency()
+                if (response.code()==200){
+                    successLoadingCurrency()
+                }else {
+                    errorLoadingCurrency()
+                }
             }
 
             override fun onFailure(call: Call<CurrencyDetail>, t: Throwable) {
@@ -74,8 +78,6 @@ class CurrencyFragment : Fragment() {
                 )
                 dataBase.insertAll(buyCurrency)
             }
-
-
         }
     }
 

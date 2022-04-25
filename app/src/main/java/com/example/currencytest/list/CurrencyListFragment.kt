@@ -7,23 +7,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.currencytest.R
 import com.example.currencytest.databinding.FragmentCurrencyListBinding
-import com.example.currencytest.retrofit.Currency
 import com.example.currencytest.retrofit.RetrofitServices
-import com.google.gson.Gson
-import com.google.gson.JsonObject
-import com.google.gson.reflect.TypeToken
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
+import retrofit2.*
 
 
 class CurrencyListFragment : Fragment(), CurrencyViewListener {
     private lateinit var binding: FragmentCurrencyListBinding
-    private lateinit var mService: RetrofitServices
-    private lateinit var adapter: AdapterCurrency
+    private lateinit var currencyListViewModel: CurrencyListViewModel
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -33,40 +28,77 @@ class CurrencyListFragment : Fragment(), CurrencyViewListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        mService = Currency.retrofitService
-        adapter = AdapterCurrency(this)
+        val retrofit: RetrofitServices =
+            (requireContext().applicationContext as SubApplication).provideDataFromNetwork()
+                .create()
+        val interactor = CurrencyListInteract(retrofit)
+        val viewModelFactory = CurrencyViewModelFactory(interactor)
+        currencyListViewModel =
+            ViewModelProvider(this, viewModelFactory)[CurrencyListViewModel::class.java]
+        currencyListViewModel.onViewCreated()
+        val adapter = AdapterCurrency(this)
         binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
         binding.recyclerView.adapter = adapter
+        currencyListViewModel.loadingListCurrency.observe(requireActivity()) {
+            adapter.setData(it)
+            Log.d("4444444", "currencies.observe")
+        }
+        currencyListViewModel.progressBarVisibility.observe(requireActivity()) {
+            setProgressBarVisibility(it)
+        }
+        currencyListViewModel.errorTextViewVisibility.observe(requireActivity()){
+            setErrorTextViewVisibility(it)
+        }
+        currencyListViewModel.listCurrencyVisibility.observe(requireActivity()){
+            setListCurrencyVisibility(it)
+        }
         Log.d("1", "onCreateList")
-        mService.getAll().enqueue(object : Callback<JsonObject> {
 
-            override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
-                Log.d("main", "onResponse")
-                val gson = Gson()
-                val i = object :
-                    TypeToken<Map<String, String>>() {}.type // указание формата парсинга данных
-                val list: Map<String, String> = gson.fromJson(response.body(), i) // с помощью вспомогательного объекта gson конвертируем тело ответа сервера в нужном формате парсинга данных
-                val list2 = list.map { i -> DataCurrency(i.key, i.value) }
-                Log.d("main", "$list2")
-                adapter.setData(list2)
+
+        /* retrofit.getAll().enqueue(object : Callback<JsonObject> {
+
+        override fun onResponse(call: Call<JsonObject>, response: Response<JsonObject>) {
+            Log.d("main", "onResponse")
+
+            val gson = Gson()
+            val i = object :
+                TypeToken<Map<String, String>>() {}.type // указание формата парсинга данных
+            val list: Map<String, String> = gson.fromJson(
+                response.body(),
+                i
+            ) // с помощью вспомогательного объекта gson конвертируем тело ответа сервера в нужном формате парсинга данных
+            val list2 = list.map { i -> DataCurrency(i.key, i.value) }
+            Log.d("main", "$list2")
+            adapter.setData(list2)
+            if (response.code() == 200) {
                 successLoadingListCurrency()
-            }
-
-            override fun onFailure(call: Call<JsonObject>, t: Throwable) {
-                Log.d("main", "onFailure")
+            } else {
                 errorLoadingListCurrency()
             }
-        })
+        }
+
+        override fun onFailure(call: Call<JsonObject>, t: Throwable) {
+            Log.d("main", "onFailure")
+            errorLoadingListCurrency()
+        }
+    })*/
+    }
+    //TODO 1. Создать фрагмент и вью модель в конструктор которой передается интерактор. Интерактор пустой. 2. Прокинуть в итерактор объект ретрофита полученный из аппликейшн.
+    //TODO 3. вызвать метод ретрофит объекта, который вернет JsonObject во вьюмодель без объекта Call
+
+    fun setProgressBarVisibility(isVisible: Boolean) {
+        val visibility = if (isVisible)  View.VISIBLE else View.INVISIBLE
+        binding.progressBar.visibility = visibility
     }
 
-    fun errorLoadingListCurrency() {
-        binding.progressBar.visibility = View.INVISIBLE
-        binding.errorMsg.visibility = View.VISIBLE
+    fun setErrorTextViewVisibility(isVisible: Boolean) {
+        val visibility = if (isVisible)  View.VISIBLE else View.INVISIBLE
+        binding.errorMsg.visibility = visibility
     }
 
-    fun successLoadingListCurrency() {
-        binding.progressBar.visibility = View.INVISIBLE
-        binding.recyclerView.visibility = View.VISIBLE
+    fun setListCurrencyVisibility(isVisible: Boolean) {
+        val visibility = if (isVisible)  View.VISIBLE else View.INVISIBLE
+        binding.recyclerView.visibility = visibility
     }
 
     override fun openCurrency(currency: String) {
