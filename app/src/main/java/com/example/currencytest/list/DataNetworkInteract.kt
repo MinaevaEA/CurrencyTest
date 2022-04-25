@@ -7,18 +7,19 @@ import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 
 
-class CurrencyListInteract(private val dataFromNetwork: RetrofitServices) {
+class DataNetworkInteract(private val dataFromNetwork: RetrofitServices) {
     suspend fun getCurrenciesResponse(): List<DataCurrency> {
-        val data = dataFromNetwork.getAllCurrency()
+        val dataAllCurrency = dataFromNetwork.getAllCurrency()
         val gson = Gson()
-        val i = object :
+        val dataObject = object :
             TypeToken<Map<String, String>>() {}.type // указание формата парсинга данных
-        val list: Map<String, String> = gson.fromJson(data, i)
+        val listMap: Map<String, String> = gson.fromJson(dataAllCurrency, dataObject)
         // с помощью вспомогательного объекта gson конвертируем тело ответа сервера в нужном формате парсинга данных
-        val list2 = list.map { i -> DataCurrency(i.key, i.value) }
+        val listDataCurrency = listMap.map { i -> DataCurrency(i.key, i.value) }
         Log.d("111111111111111", "Interact")
-        return list2
+        return listDataCurrency
     }
 }
+
 
 

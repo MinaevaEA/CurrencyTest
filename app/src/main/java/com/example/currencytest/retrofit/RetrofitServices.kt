@@ -10,9 +10,6 @@ import retrofit2.http.Path
 
 interface RetrofitServices {
     @GET("latest/currencies.json")
-    fun getAll(): Call<JsonObject>
-
-    @GET("latest/currencies.json")
     suspend fun getAllCurrency(): JsonObject
 
     @GET("latest/currencies/{valute}/rub.json")

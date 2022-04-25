@@ -17,13 +17,13 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         if (savedInstanceState == null) {
-           supportFragmentManager.beginTransaction()
+            supportFragmentManager.beginTransaction()
                 .addToBackStack(null)
                 .replace(R.id.activity_main, RegistrationFragment.newInstance())
                 .commit()
         }
-       // val navController = this.findNavController(R.id.fragment)
-      //  binding.bottomNavView.setupWithNavController(navController)
+        // val navController = this.findNavController(R.id.fragment)
+        //  binding.bottomNavView.setupWithNavController(navController)
     }
 
 

@@ -11,11 +11,12 @@ import com.example.currencytest.databinding.ListCurrencyItemBinding
 import java.util.ArrayList
 
 
-class AdapterCurrency(
+class CurrencyListAdapter(
     private val currencyAdapterListener: CurrencyViewListener
 ) :
-    RecyclerView.Adapter<AdapterCurrency.BaseHolder>() {
+    RecyclerView.Adapter<CurrencyListAdapter.BaseHolder>() {
     private var dataSet = ArrayList<DataCurrency>()
+
     @SuppressLint("NotifyDataSetChanged")
     fun setData(newList: List<DataCurrency>) {
         dataSet.clear()
@@ -63,7 +64,7 @@ class AdapterCurrency(
         Log.d("4444444", "onBindViewHolder")
 
         holder.itemView.setOnClickListener {
-            currencyAdapterListener.openCurrency(dataSet[position].valute)
+            currencyAdapterListener.onCurrencyClicked(dataSet[position].valute)
         }
     }
 

@@ -5,7 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.currencytest.currency.BuyCurrencyListFragment
+import com.example.currencytest.currency_buy.BuyCurrencyListFragment
 import com.example.currencytest.databinding.FragmentMainBinding
 import com.example.currencytest.list.CurrencyListFragment
 

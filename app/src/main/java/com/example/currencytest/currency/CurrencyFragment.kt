@@ -1,4 +1,4 @@
-package com.example.currencytest.list
+package com.example.currencytest.currency
 
 
 import android.os.Bundle
@@ -13,6 +13,8 @@ import com.example.currencytest.MainFragment
 import com.example.currencytest.R
 import com.example.currencytest.databinding.FragmentAboutCurrencyBinding
 import com.example.currencytest.db.Currency
+import com.example.currencytest.list.CurrencyDetail
+import com.example.currencytest.list.SubApplication
 import com.example.currencytest.retrofit.RetrofitServices
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.launch
@@ -36,7 +38,8 @@ class CurrencyFragment : Fragment() {
         val dataBase =
             (requireContext().applicationContext as SubApplication).provideDataBase().currencyDao()
         val currency = arguments?.getString(TAG_FOR_CURRENCY, "") ?: ""
-        mService =  (requireContext().applicationContext as SubApplication).provideDataFromNetwork().create()
+        mService = (requireContext().applicationContext as SubApplication).provideDataFromNetwork()
+            .create()
         binding.title.text = currency
         mService.getConcreteCurrency(currency).enqueue(object : Callback<CurrencyDetail> {
             override fun onResponse(
@@ -46,9 +49,9 @@ class CurrencyFragment : Fragment() {
                 Log.d("3", "DataCurrency ${response.body()}")
                 binding.price.text = response.body()?.rub.toString()
                 binding.date.text = response.body()?.date
-                if (response.code()==200){
+                if (response.code() == 200) {
                     successLoadingCurrency()
-                }else {
+                } else {
                     errorLoadingCurrency()
                 }
             }
@@ -62,13 +65,13 @@ class CurrencyFragment : Fragment() {
             val numberOfBuy = binding.numberOfBuy.text.toString().toIntOrNull() ?: 0
             val price = binding.price.text.toString().toDoubleOrNull() ?: 0.0
             val date = binding.date
-            Snackbar.make(it,"Покупка произведена!",Snackbar.LENGTH_LONG)
+            Snackbar.make(it, "Покупка произведена!", Snackbar.LENGTH_LONG)
                 .setAction("Вернуться в меню", OnClickListener {
-                requireActivity().supportFragmentManager.beginTransaction()
-                    .addToBackStack(null)
-                    .replace(R.id.activity_main, MainFragment.newInstance())
-                    .commit()
-            }).show()
+                    requireActivity().supportFragmentManager.beginTransaction()
+                        .addToBackStack(null)
+                        .replace(R.id.activity_main, MainFragment.newInstance())
+                        .commit()
+                }).show()
             lifecycleScope.launch {
                 val buyCurrency = Currency(
                     title = title.toString(),

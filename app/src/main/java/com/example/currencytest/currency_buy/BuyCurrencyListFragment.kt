@@ -1,4 +1,4 @@
-package com.example.currencytest.currency
+package com.example.currencytest.currency_buy
 
 
 import android.os.Bundle

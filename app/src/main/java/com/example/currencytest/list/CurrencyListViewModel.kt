@@ -7,16 +7,17 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
 
 
-class CurrencyListViewModel(private val interactor: CurrencyListInteract) : ViewModel() {
+class CurrencyListViewModel(private val storageDataNetwork: DataNetworkInteract) : ViewModel() {
     val loadingListCurrency = MutableLiveData<List<DataCurrency>>()
     val progressBarVisibility = MutableLiveData<Boolean>()
     val errorTextViewVisibility = MutableLiveData<Boolean>()
     val listCurrencyVisibility = MutableLiveData<Boolean>()
+    val onCurrencyClicked = SingleLiveEvent<String>()
     fun onViewCreated() {
         viewModelScope.launch {
             try {
-                val i = interactor.getCurrenciesResponse()
-                loadingListCurrency.postValue(i)
+                val listCurrenciesResponse = storageDataNetwork.getCurrenciesResponse()
+                loadingListCurrency.postValue(listCurrenciesResponse)
                 listCurrencyVisibility.postValue(true)
             } catch (e: Exception) {
                 progressBarVisibility.postValue(false)
@@ -24,11 +25,15 @@ class CurrencyListViewModel(private val interactor: CurrencyListInteract) : View
             }
         }
     }
+
+    fun onCurrencyClicked(currencyPosition: String) {
+        onCurrencyClicked.postValue(currencyPosition)
+    }
 }
 
 @Suppress("UNCHECKED_CAST")
 class CurrencyViewModelFactory(
-    val interact: CurrencyListInteract
+    private val interact: DataNetworkInteract
 ) : ViewModelProvider.NewInstanceFactory() {
     override fun <T : ViewModel> create(modelClass: Class<T>): T =
         CurrencyListViewModel(interact) as T
