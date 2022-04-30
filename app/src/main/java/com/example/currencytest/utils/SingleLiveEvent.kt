@@ -1,4 +1,4 @@
-package com.example.currencytest.list
+package com.example.currencytest.utils
 
 import androidx.annotation.MainThread
 import androidx.annotation.Nullable

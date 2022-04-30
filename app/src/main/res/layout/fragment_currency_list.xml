@@ -15,7 +15,7 @@
         tools:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        tools:listitem="@layout/list_currency_item"
+        tools:listitem="@layout/item_currency_odd"
          />
 
     <ProgressBar

@@ -3,7 +3,7 @@ package com.example.currencytest.currency_buy
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.currencytest.databinding.ListBuyCurrencyBinding
+import com.example.currencytest.databinding.ItemBuyCurrencyBinding
 import com.example.currencytest.db.Currency
 
 
@@ -12,7 +12,7 @@ class AdapterBuyCurrency(
 ) :
     RecyclerView.Adapter<AdapterBuyCurrency.BuyViewHolder>() {
 
-    class BuyViewHolder(private val binding: ListBuyCurrencyBinding) :
+    class BuyViewHolder(private val binding: ItemBuyCurrencyBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(data: Currency) {
@@ -25,7 +25,7 @@ class AdapterBuyCurrency(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BuyViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
-        val binding = ListBuyCurrencyBinding.inflate(layoutInflater, parent, false)
+        val binding = ItemBuyCurrencyBinding.inflate(layoutInflater, parent, false)
         return BuyViewHolder(binding)
     }
 

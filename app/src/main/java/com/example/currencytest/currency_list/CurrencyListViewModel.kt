@@ -1,9 +1,10 @@
-package com.example.currencytest.list
+package com.example.currencytest.currency_list
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
+import com.example.currencytest.utils.SingleLiveEvent
 import kotlinx.coroutines.launch
 
 
@@ -11,14 +12,14 @@ class CurrencyListViewModel(private val storageDataNetwork: DataNetworkInteract)
     val loadingListCurrency = MutableLiveData<List<DataCurrency>>()
     val progressBarVisibility = MutableLiveData<Boolean>()
     val errorTextViewVisibility = MutableLiveData<Boolean>()
-    val listCurrencyVisibility = MutableLiveData<Boolean>()
-    val onCurrencyClicked = SingleLiveEvent<String>()
+    val currencyListAdapterVisibility = MutableLiveData<Boolean>()
+    val onCurrencyClickedEvent = SingleLiveEvent<String>()
     fun onViewCreated() {
         viewModelScope.launch {
             try {
-                val listCurrenciesResponse = storageDataNetwork.getCurrenciesResponse()
+                val listCurrenciesResponse = storageDataNetwork.currencyListInteractor()
                 loadingListCurrency.postValue(listCurrenciesResponse)
-                listCurrencyVisibility.postValue(true)
+                currencyListAdapterVisibility.postValue(true)
             } catch (e: Exception) {
                 progressBarVisibility.postValue(false)
                 errorTextViewVisibility.postValue(false)
@@ -27,12 +28,12 @@ class CurrencyListViewModel(private val storageDataNetwork: DataNetworkInteract)
     }
 
     fun onCurrencyClicked(currencyPosition: String) {
-        onCurrencyClicked.postValue(currencyPosition)
+        onCurrencyClickedEvent.postValue(currencyPosition)
     }
 }
 
 @Suppress("UNCHECKED_CAST")
-class CurrencyViewModelFactory(
+class CurrencyListViewModelFactory(
     private val interact: DataNetworkInteract
 ) : ViewModelProvider.NewInstanceFactory() {
     override fun <T : ViewModel> create(modelClass: Class<T>): T =

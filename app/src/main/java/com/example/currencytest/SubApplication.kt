@@ -1,4 +1,4 @@
-package com.example.currencytest.list
+package com.example.currencytest
 
 import android.app.Application
 import androidx.room.Room

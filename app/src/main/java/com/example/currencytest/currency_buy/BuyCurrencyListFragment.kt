@@ -10,7 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.currencytest.databinding.FragmentBuyCurrencyListBinding
-import com.example.currencytest.list.SubApplication
+import com.example.currencytest.SubApplication
 import kotlinx.coroutines.launch
 
 
@@ -33,7 +33,6 @@ class BuyCurrencyListFragment : Fragment() {
                     .getAll()
             )
         }
-        Log.d("1", "onCreateList")
     }
 
     companion object {

@@ -18,7 +18,7 @@
         tools:layout="@layout/fragment_buy_currency_list" />
     <fragment
         android:id="@+id/currencyListFragment"
-        android:name="com.example.currencytest.list.CurrencyListFragment"
+        android:name="com.example.currencytest.currency_list.CurrencyListFragment"
         android:label="CurrencyListFragment" />
     <fragment
         android:id="@+id/registrationFragment2"

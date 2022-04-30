@@ -1,4 +1,4 @@
-package com.example.currencytest.list
+package com.example.currencytest.currency_list
 
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize

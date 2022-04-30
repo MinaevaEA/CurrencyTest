@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.example.currencytest.currency_buy.BuyCurrencyListFragment
 import com.example.currencytest.databinding.FragmentMainBinding
-import com.example.currencytest.list.CurrencyListFragment
+import com.example.currencytest.currency_list.CurrencyListFragment
 
 
 class MainFragment : Fragment() {

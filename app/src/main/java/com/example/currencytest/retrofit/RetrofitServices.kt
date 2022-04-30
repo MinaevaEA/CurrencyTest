@@ -1,6 +1,6 @@
 package com.example.currencytest.retrofit
 
-import com.example.currencytest.list.CurrencyDetail
+import com.example.currencytest.currency_list.CurrencyDetail
 import com.google.gson.JsonObject
 import retrofit2.Call
 import retrofit2.Retrofit
@@ -13,7 +13,7 @@ interface RetrofitServices {
     suspend fun getAllCurrency(): JsonObject
 
     @GET("latest/currencies/{valute}/rub.json")
-    fun getConcreteCurrency(@Path("valute") valute: String): Call<CurrencyDetail>
+    suspend fun getAboutCurrency(@Path("valute") valute: String): CurrencyDetail
 
     companion object {
         private const val baseUrl = "https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/"

@@ -8,7 +8,7 @@ interface CurrencyDao {
     suspend fun getAll(): List<Currency>
 
     @Insert
-    suspend fun insertAll(currency: Currency)
+    suspend fun insertAll(currency: Currency): Long
 
     @Update
     suspend fun update(currency: Currency)
