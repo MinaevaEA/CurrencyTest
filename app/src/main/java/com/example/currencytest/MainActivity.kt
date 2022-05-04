@@ -22,9 +22,12 @@ class MainActivity : AppCompatActivity() {
                 .replace(R.id.activity_main, RegistrationFragment.newInstance())
                 .commit()
         }
-        // val navController = this.findNavController(R.id.fragment)
-        //  binding.bottomNavView.setupWithNavController(navController)
+        /*val navController = this.findNavController(R.id.fragment)
+        binding.bottomNavView.setupWithNavController(navController)
+        binding.bottomNavView.setOnItemReselectedListener { item ->
+            navController.popBackStack(item.itemId, false)
+        }*/
     }
-
-
 }
+
+

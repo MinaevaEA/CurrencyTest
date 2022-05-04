@@ -36,7 +36,6 @@ class CurrencyListFragment : Fragment(), CurrencyViewListener {
         val viewModelFactory = CurrencyListViewModelFactory(storageDataNetwork)
         currencyListViewModel =
             ViewModelProvider(this, viewModelFactory)[CurrencyListViewModel::class.java]
-        currencyListViewModel.onViewCreated()
         adapter = CurrencyListAdapter(this)
         binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
         binding.recyclerView.adapter = adapter

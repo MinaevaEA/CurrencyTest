@@ -58,7 +58,7 @@ class CurrencyFragment : Fragment() {
         }
     }
 
-    fun openSnackbar() {
+    private fun openSnackBar() {
         Snackbar.make(binding.root, "Покупка произведена!", Snackbar.LENGTH_LONG)
             .setAction("Вернуться в меню", OnClickListener {
                 currencyViewModel.onClickedSnackBar()
@@ -112,7 +112,7 @@ class CurrencyFragment : Fragment() {
                 .show()
         }
         currencyViewModel.showSnackBar.observe(requireActivity()) {
-            openSnackbar()
+            openSnackBar()
         }
         currencyViewModel.backToMain.observe(requireActivity()) {
             goToMain()

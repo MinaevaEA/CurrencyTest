@@ -14,7 +14,7 @@ class CurrencyListViewModel(private val storageDataNetwork: DataNetworkInteract)
     val errorTextViewVisibility = MutableLiveData<Boolean>()
     val currencyListAdapterVisibility = MutableLiveData<Boolean>()
     val onCurrencyClickedEvent = SingleLiveEvent<String>()
-    fun onViewCreated() {
+    private fun setDataNetwork() {
         viewModelScope.launch {
             try {
                 val listCurrenciesResponse = storageDataNetwork.currencyListInteractor()
@@ -29,6 +29,10 @@ class CurrencyListViewModel(private val storageDataNetwork: DataNetworkInteract)
 
     fun onCurrencyClicked(currencyPosition: String) {
         onCurrencyClickedEvent.postValue(currencyPosition)
+    }
+
+    init {
+        setDataNetwork()
     }
 }
 

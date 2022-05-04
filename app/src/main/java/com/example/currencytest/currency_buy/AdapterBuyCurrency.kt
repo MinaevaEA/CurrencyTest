@@ -1,16 +1,24 @@
 package com.example.currencytest.currency_buy
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.currencytest.databinding.ItemBuyCurrencyBinding
 import com.example.currencytest.db.Currency
+import java.util.ArrayList
 
 
-class AdapterBuyCurrency(
-    private var dataBuyList: List<Currency>
-) :
+class AdapterBuyCurrency:
     RecyclerView.Adapter<AdapterBuyCurrency.BuyViewHolder>() {
+    private var dataSetCurrency = ArrayList<Currency>()
+
+    @SuppressLint("NotifyDataSetChanged")
+    fun setDataCurrency(newList: List<Currency>) {
+        dataSetCurrency.clear()
+        dataSetCurrency = newList as ArrayList<Currency>
+        notifyDataSetChanged()
+    }
 
     class BuyViewHolder(private val binding: ItemBuyCurrencyBinding) :
         RecyclerView.ViewHolder(binding.root) {
@@ -30,10 +38,10 @@ class AdapterBuyCurrency(
     }
 
     override fun onBindViewHolder(holder: BuyViewHolder, position: Int) {
-        holder.bind(dataBuyList[position])
+        holder.bind(dataSetCurrency[position])
 
     }
 
-    override fun getItemCount() = dataBuyList.size
+    override fun getItemCount() = dataSetCurrency.size
 
 }
