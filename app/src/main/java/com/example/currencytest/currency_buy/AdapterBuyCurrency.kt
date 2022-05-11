@@ -25,8 +25,9 @@ class AdapterBuyCurrency:
 
         fun bind(data: Currency) {
             binding.title.text = data.title
-            binding.price.text = data.price
+            binding.country.text = data.price
             binding.number.text = data.number.toString()
+            binding.date.text = data.date
             binding.generalCurrency.text = data.generalSumm.toString()
         }
     }

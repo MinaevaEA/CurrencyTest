@@ -9,10 +9,10 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import com.example.currencytest.MainFragment
 import com.example.currencytest.R
 import com.example.currencytest.databinding.FragmentAboutCurrencyBinding
 import com.example.currencytest.SubApplication
+import com.example.currencytest.currency_buy.BuyCurrencyListFragment
 import com.example.currencytest.currency_list.CurrencyDetail
 import com.example.currencytest.retrofit.RetrofitServices
 import com.google.android.material.snackbar.Snackbar
@@ -47,12 +47,12 @@ class CurrencyFragment : Fragment() {
 
             val title = binding.title.text
             val numberOfBuy = binding.numberOfBuy.text.toString().toIntOrNull() ?: 0
-            val price = binding.price.text.toString().toDoubleOrNull() ?: 0.0
-            val date = binding.date
+            val price = binding.country.text.toString().toDoubleOrNull() ?: 0.0
+            val date = binding.date.text.toString()
             currencyViewModel.onClickedBuyCurrency(
                 title = title.toString(),
                 price = price.toString(),
-                date = date.toString(),
+                date = date,
                 number = numberOfBuy
             )
         }
@@ -60,7 +60,7 @@ class CurrencyFragment : Fragment() {
 
     private fun openSnackBar() {
         Snackbar.make(binding.root, "Покупка произведена!", Snackbar.LENGTH_LONG)
-            .setAction("Вернуться в меню", OnClickListener {
+            .setAction("Перейти к покупкам", OnClickListener {
                 currencyViewModel.onClickedSnackBar()
             }).show()
     }
@@ -68,7 +68,7 @@ class CurrencyFragment : Fragment() {
     private fun goToMain() {
         requireActivity().supportFragmentManager.beginTransaction()
             .addToBackStack(null)
-            .replace(R.id.activity_main, MainFragment.newInstance())
+            .replace(R.id.activity_main, BuyCurrencyListFragment.newInstance())
             .commit()
     }
 
@@ -78,7 +78,7 @@ class CurrencyFragment : Fragment() {
     }
 
     private fun showCurrency(currency: CurrencyDetail) {
-        binding.price.text = currency.rub.toString()
+        binding.country.text = currency.rub.toString()
         binding.date.text = currency.date
     }
 
@@ -93,7 +93,7 @@ class CurrencyFragment : Fragment() {
             setVisibility(it, binding.progressBar)
         }
         currencyViewModel.priceVisibility.observe(requireActivity()) {
-            setVisibility(it, binding.price)
+            setVisibility(it, binding.country)
         }
         currencyViewModel.dateVisibility.observe(requireActivity()) {
             setVisibility(it, binding.date)

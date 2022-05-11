@@ -7,87 +7,107 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/title"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#5E03DA32"
-        android:padding="10dp"
-        android:textSize="25sp"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:id="@+id/date_name"
+        style="@style/ConcreteCurrencyTitle"
+
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/date"
+        app:layout_constraintBottom_toTopOf="@+id/numberOfBuy"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="MissingConstraints"
-        android:visibility="gone"
-        tools:visibility="visible"/>
+        app:layout_constraintTop_toBottomOf="@+id/price_name"
+        app:layout_constraintVertical_bias="0.125" />
 
     <TextView
-        android:id="@+id/price"
-        android:layout_width="match_parent"
+        android:id="@+id/price_name"
+        style="@style/ConcreteCurrencyTitle"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="#5E03DA32"
-        android:padding="10dp"
-        android:textSize="25sp"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="12dp"
+        android:text="@string/price"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/valute_name" />
+
+    <TextView
+        android:id="@+id/title"
+        style="@style/ConcreteCurrencyTitle"
+        android:textColor="@color/black"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="65dp"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/date"
+        app:layout_constraintStart_toEndOf="@+id/valute_name"
+        app:layout_constraintTop_toTopOf="parent"
         tools:ignore="MissingConstraints"
+        tools:visibility="visible" />
+
+    <TextView
+        android:id="@+id/country"
+        style="@style/ConcreteCurrencyTitle"
+        android:layout_marginStart="16dp"
+        android:textColor="@color/black"
+        android:layout_marginTop="11dp"
         android:visibility="gone"
-        tools:visibility="visible"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.011"
+        app:layout_constraintStart_toEndOf="@+id/price_name"
+        app:layout_constraintTop_toBottomOf="@+id/title"
+        tools:ignore="MissingConstraints"
+        tools:visibility="visible" />
 
     <TextView
         android:id="@+id/date"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#5E03DA32"
-        android:padding="10dp"
-        android:textSize="25sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/title"
-        tools:ignore="MissingConstraints"
+        style="@style/ConcreteCurrencyTitle"
+        android:layout_marginStart="52dp"
+        android:textColor="@color/black"
+        android:layout_marginTop="11dp"
         android:visibility="gone"
-        tools:visibility="visible"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.045"
+        app:layout_constraintStart_toEndOf="@+id/date_name"
+        app:layout_constraintTop_toBottomOf="@+id/country"
+        tools:ignore="MissingConstraints"
+        tools:visibility="visible" />
 
-    <ImageButton
+    <Button
         android:id="@+id/buyButton"
-        android:layout_width="88dp"
-        android:layout_height="44dp"
-        android:background="#023F51B5"
+        android:layout_width="108dp"
+        android:layout_height="40dp"
+        android:text="@string/btn_buy"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.481"
+        app:layout_constraintHorizontal_bias="0.355"
         app:layout_constraintStart_toEndOf="@+id/numberOfBuy"
-        app:layout_constraintTop_toBottomOf="@+id/price"
-        app:layout_constraintVertical_bias="0.051"
-        app:srcCompat="@android:drawable/ic_menu_add"
+        app:layout_constraintTop_toBottomOf="@+id/date"
+        app:layout_constraintVertical_bias="0.036"
         tools:ignore="ContentDescription,MissingConstraints,SpeakableTextPresentCheck,TouchTargetSizeCheck"
         tools:visibility="visible" />
 
     <EditText
         android:id="@+id/numberOfBuy"
-        android:layout_width="91dp"
-        android:layout_height="45dp"
-        android:layout_marginStart="68dp"
-        android:ems="10"
-        android:importantForAutofill="no"
+        android:layout_width="215dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="16dp"
+        android:hint="@string/buy_value"
         android:inputType="number"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/price"
-        app:layout_constraintVertical_bias="0.049"
-        tools:ignore="LabelFor,TouchTargetSizeCheck,SpeakableTextPresentCheck"
+        app:layout_constraintTop_toBottomOf="@+id/date"
+        app:layout_constraintVertical_bias="0.036"
+        tools:ignore="Autofill,MissingConstraints"
         tools:visibility="visible" />
 
     <TextView
         android:id="@+id/error_msg"
+        style="@style/Title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="236dp"
-        android:text="Что-то пошло не так!"
+        android:layout_marginBottom="348dp"
+        android:text="@string/error_msg"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -107,8 +127,14 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="MissingConstraints" />
 
-
-
+    <TextView
+        android:id="@+id/valute_name"
+        style="@style/ConcreteCurrencyTitle"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="64dp"
+        android:text="@string/valute_name"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

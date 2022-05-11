@@ -33,8 +33,8 @@ class BuyCurrencyListFragment : Fragment() {
             ViewModelProvider(this, viewModelFactory)[BuyCurrencyListViewModel::class.java]
         adapter = AdapterBuyCurrency()
         buyCurrencyViewModel.onViewCreatedBuy()
-        binding.recyclerView2.layoutManager = LinearLayoutManager(requireContext())
-        binding.recyclerView2.adapter = adapter
+        binding.recyclerViewBuy.layoutManager = LinearLayoutManager(requireContext())
+        binding.recyclerViewBuy.adapter = adapter
         initObsBuy()
     }
 

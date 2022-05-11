@@ -7,7 +7,7 @@
     tools:context=".currency_buy.BuyCurrencyListFragment">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView2"
+        android:id="@+id/recyclerViewBuy"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_constraintEnd_toEndOf="parent"

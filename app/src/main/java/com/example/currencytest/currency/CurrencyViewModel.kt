@@ -5,12 +5,13 @@ import com.example.currencytest.currency_list.CurrencyDetail
 import com.example.currencytest.db.Currency
 import com.example.currencytest.utils.SingleLiveEvent
 import kotlinx.coroutines.launch
+import kotlin.math.floor
 
 
 class CurrencyViewModel(
     private val dataConcreteCurrency: CurrencyInteract,
     private val value: String
-    ) :
+) :
     ViewModel() {
     val dataCurrency = MutableLiveData<CurrencyDetail>()
     val errorTextViewVisibility = MutableLiveData<Boolean>()
@@ -54,8 +55,14 @@ class CurrencyViewModel(
         }
         viewModelScope.launch {
             val insertResult = dataConcreteCurrency.insertCurrencyInteractor(
-                Currency(title, price, number, date, generalSumm = price.toDouble() * number)
-            )//Это значение, которое показывает была ли произведена транзакция в бд
+                Currency(
+                    title,
+                    price,
+                    number,
+                    date,
+                    generalSumm = (price.toDouble() * number))
+            )
+            //Это значение, которое показывает была ли произведена транзакция в бд
             if (insertResult > 0) {
                 showSnackBar.postValue(Unit)
             } else {

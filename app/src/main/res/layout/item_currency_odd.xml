@@ -4,38 +4,29 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="#AE37D16F">
+    android:background="@color/background">
 
     <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="47dp"
-        android:layout_height="44dp"
-        android:layout_marginStart="16dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0"
+        android:id="@+id/img_valute"
+        style="@style/RecyclerImg"
         app:srcCompat="@android:drawable/ic_menu_mapmode"
-        tools:ignore="ContentDescription" />
+        tools:ignore="ContentDescription,MissingConstraints" />
 
     <TextView
         android:id="@+id/title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="80dp"
-        android:layout_marginBottom="12dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/price"
-        app:layout_constraintStart_toEndOf="@+id/imageView2"
+        style="@style/RecyclerTitle"
+        app:layout_constraintEnd_toStartOf="@+id/country"
+        app:layout_constraintStart_toEndOf="@+id/img_valute"
         tools:ignore="MissingConstraints" />
 
     <TextView
-        android:id="@+id/price"
+        android:id="@+id/country"
+        style="@style/RecyclerCountry"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="184dp"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="100dp"
+        android:layout_marginTop="12dp"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="MissingConstraints" />
 

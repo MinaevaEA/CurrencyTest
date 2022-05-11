@@ -2,9 +2,11 @@ package com.example.currencytest.currency_list
 
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -40,6 +42,20 @@ class CurrencyListFragment : Fragment(), CurrencyViewListener {
         binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
         binding.recyclerView.adapter = adapter
         initObservers()
+
+        binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener,
+            androidx.appcompat.widget.SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                currencyListViewModel.searchNotes(newText)
+                return true
+            }
+        })
+
+
     }
 
     override fun onCurrencyClicked(currencyPosition: String) {
@@ -60,6 +76,7 @@ class CurrencyListFragment : Fragment(), CurrencyViewListener {
 
     private fun initObservers() {
         currencyListViewModel.loadingListCurrency.observe(requireActivity()) {
+            Log.d("listDebug","view: ${it.size}")
             adapter.setData(it)
         }
         currencyListViewModel.progressBarVisibility.observe(requireActivity()) {
@@ -75,6 +92,9 @@ class CurrencyListFragment : Fragment(), CurrencyViewListener {
         currencyListViewModel.onCurrencyClickedEvent.observe(requireActivity()) {
             openAboutCurrency(it)
         }
+        /*  currencyListViewModel.searchView.observe(requireActivity()){
+              setVisibility(it,binding.searchView)
+          }*/
     }
 
     companion object {

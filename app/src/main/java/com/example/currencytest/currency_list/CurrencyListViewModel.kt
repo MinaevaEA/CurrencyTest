@@ -1,5 +1,6 @@
 package com.example.currencytest.currency_list
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
@@ -14,12 +15,15 @@ class CurrencyListViewModel(private val storageDataNetwork: DataNetworkInteract)
     val errorTextViewVisibility = MutableLiveData<Boolean>()
     val currencyListAdapterVisibility = MutableLiveData<Boolean>()
     val onCurrencyClickedEvent = SingleLiveEvent<String>()
+    var fullCurrenciesList = ArrayList<DataCurrency>()
     private fun setDataNetwork() {
         viewModelScope.launch {
             try {
                 val listCurrenciesResponse = storageDataNetwork.currencyListInteractor()
-                loadingListCurrency.postValue(listCurrenciesResponse)
+                fullCurrenciesList = listCurrenciesResponse as ArrayList<DataCurrency>
+                loadingListCurrency.postValue(fullCurrenciesList)
                 currencyListAdapterVisibility.postValue(true)
+
             } catch (e: Exception) {
                 progressBarVisibility.postValue(false)
                 errorTextViewVisibility.postValue(false)
@@ -29,6 +33,26 @@ class CurrencyListViewModel(private val storageDataNetwork: DataNetworkInteract)
 
     fun onCurrencyClicked(currencyPosition: String) {
         onCurrencyClickedEvent.postValue(currencyPosition)
+    }
+
+    fun searchNotes(query: String?) {
+        val filteredList = ArrayList<DataCurrency>()
+        if (query?.isNotEmpty() == true) {
+            fullCurrenciesList.filter {
+                it.valute.contains(
+                    other = query,
+                    ignoreCase = false
+                ) //or it.country.contains(other = query, ignoreCase = false)
+            }
+                .forEach { filteredList.add(it) }
+            fullCurrenciesList = filteredList
+            Log.d("listDebug", "searchNotes: ${fullCurrenciesList.size}")
+            loadingListCurrency.value = fullCurrenciesList
+
+        } else {
+
+            setDataNetwork()
+        }
     }
 
     init {

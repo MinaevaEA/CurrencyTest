@@ -33,7 +33,7 @@ class CurrencyListAdapter(
         BaseCurrencyHolder(binding) {
         override fun bind(data: DataCurrency) {
             binding.title.text = data.valute
-            binding.price.text = data.country
+            binding.country.text = data.country
         }
     }
 
@@ -41,7 +41,7 @@ class CurrencyListAdapter(
         BaseCurrencyHolder(binding) {
         override fun bind(data: DataCurrency) {
             binding.title.text = data.valute
-            binding.price.text = data.country
+            binding.country.text = data.country
         }
     }
 

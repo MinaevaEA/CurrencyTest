@@ -5,7 +5,7 @@
         <item name="colorPrimary">@color/btn</item>
         <item name="colorPrimaryVariant">@color/btn</item>
         <item name="colorOnPrimary">@color/white</item>
-        <item name="colorOnSecondary">@color/black</item>
+        <item name="colorOnSecondary">@color/title</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
@@ -16,13 +16,65 @@
         <item name="android:textSize">15sp</item>
         <item name="android:textAllCaps">true</item>
     </style>
+
     <style name="Title">
-        <item name="android:textSize">30sp</item> 
+        <item name="android:textSize">30sp</item>
         <item name="android:layout_marginRight">10dp</item>
         <item name="android:layout_marginLeft">20dp</item>
         <item name="android:layout_marginTop">40dp</item>
         <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/title</item>
     </style>
+
+    <style name="RecyclerImg">
+        <item name="layout_constraintTop_toTopOf">parent</item>
+        <item name="layout_constraintBottom_toBottomOf">parent</item>
+        <item name="layout_constraintHorizontal_bias">0.693</item>
+        <item name="layout_constraintStart_toStartOf">parent</item>
+        <item name="layout_constraintVertical_bias">1.0</item>
+        <item name="android:layout_marginEnd">8dp</item>
+        <item name="android:layout_width">56dp</item>
+        <item name="android:layout_height">45dp</item>
+        <item name="android:layout_marginStart">16dp</item>
+    </style>
+
+    <style name="RecyclerTitle">
+        <item name="layout_constraintBottom_toBottomOf">parent</item>
+        <item name="layout_constraintEnd_toEndOf">parent</item>
+        <item name="layout_constraintStart_toStartOf">parent</item>
+        <item name="android:layout_marginBottom">12dp</item>
+        <item name="android:layout_marginTop">12dp</item>
+        <item name="layout_constraintHorizontal_bias">0.707</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="layout_constraintTop_toTopOf">parent</item>
+    </style>
+
+    <style name="RecyclerCountry">
+        <item name="layout_constraintEnd_toEndOf">parent</item>
+        <item name="layout_constraintHorizontal_bias">0.272</item>
+        <item name="layout_constraintTop_toTopOf">parent</item>
+        <item name="android:layout_marginTop">12dp</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginStart">100dp</item>
+        <item name="layout_constraintStart_toStartOf">parent</item>
+    </style>
+
+    <style name="ConcreteCurrencyTitle">
+        <item name="android:textSize">18sp</item>
+        <item name="android:padding">10dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">wrap_content</item>
+    </style>
+<style name="BuyList">
+    <item name="android:textColor">@color/black</item>
+    <item name="android:textSize">16sp</item>
+</style>
 
     <style name="Theme.Splash" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->

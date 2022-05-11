@@ -14,6 +14,7 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="116dp"
+        style="@style/Title"
         android:text="@string/authorization"
         android:textAppearance="?android:attr/textAppearanceLarge"
         app:layout_constraintEnd_toEndOf="parent"
@@ -33,7 +34,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/Login"
         tools:ignore="Autofill,TextFields">
-
         <requestFocus />
     </EditText>
 
