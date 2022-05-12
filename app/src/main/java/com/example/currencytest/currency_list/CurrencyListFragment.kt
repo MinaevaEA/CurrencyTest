@@ -7,8 +7,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.SearchView
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.currencytest.R
 import com.example.currencytest.SubApplication
@@ -51,11 +53,10 @@ class CurrencyListFragment : Fragment(), CurrencyViewListener {
 
             override fun onQueryTextChange(newText: String?): Boolean {
                 currencyListViewModel.searchNotes(newText)
+                //TODO не работает поиск
                 return true
             }
         })
-
-
     }
 
     override fun onCurrencyClicked(currencyPosition: String) {
@@ -68,15 +69,19 @@ class CurrencyListFragment : Fragment(), CurrencyViewListener {
     }
 
     private fun openAboutCurrency(currency: String) {
-        requireActivity().supportFragmentManager.beginTransaction()
+        val bundle = CurrencyFragment.newInst3(currency)
+       // this.findNavController().navigate
+        findNavController().navigate(R.id.action_currency_list_to_about, bundle)
+        //TODO неккоректная работа отображения конкретной валюты
+        /*requireActivity().supportFragmentManager.beginTransaction()
             .addToBackStack(null)
             .replace(R.id.activity_main, CurrencyFragment.newInstance(currency))
-            .commit()
+            .commit()*/
     }
 
     private fun initObservers() {
         currencyListViewModel.loadingListCurrency.observe(requireActivity()) {
-            Log.d("listDebug","view: ${it.size}")
+            Log.d("listDebug", "view: ${it.size}")
             adapter.setData(it)
         }
         currencyListViewModel.progressBarVisibility.observe(requireActivity()) {
@@ -92,9 +97,7 @@ class CurrencyListFragment : Fragment(), CurrencyViewListener {
         currencyListViewModel.onCurrencyClickedEvent.observe(requireActivity()) {
             openAboutCurrency(it)
         }
-        /*  currencyListViewModel.searchView.observe(requireActivity()){
-              setVisibility(it,binding.searchView)
-          }*/
+
     }
 
     companion object {

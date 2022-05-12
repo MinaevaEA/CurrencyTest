@@ -25,8 +25,5 @@ class SubApplication : Application() {
 
     fun provideDataBase(): AppDatabase {
         return dataBase
-
-
     }
-//TODO retrofit инициализируется через subapplication
 }

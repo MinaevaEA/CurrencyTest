@@ -3,8 +3,10 @@ package com.example.currencytest.currency_list
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewbinding.ViewBinding
+import com.example.currencytest.R
 import com.example.currencytest.databinding.ItemCurrencyEvenBinding
 import com.example.currencytest.databinding.ItemCurrencyOddBinding
 import java.util.ArrayList
@@ -19,7 +21,7 @@ class CurrencyListAdapter(
     @SuppressLint("NotifyDataSetChanged")
     fun setData(newList: List<DataCurrency>) {
         dataSet.clear()
-        dataSet = newList as ArrayList<DataCurrency>
+        dataSet.addAll(newList)
         notifyDataSetChanged()
     }
 
@@ -58,6 +60,7 @@ class CurrencyListAdapter(
     override fun onBindViewHolder(holder: BaseCurrencyHolder, position: Int) {
         holder.bind(dataSet[position])
         holder.itemView.setOnClickListener {
+
             currencyAdapterListener.onCurrencyClicked(dataSet[position].valute)
         }
     }

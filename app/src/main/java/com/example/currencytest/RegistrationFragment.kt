@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.*
+import androidx.navigation.fragment.findNavController
 import com.example.currencytest.databinding.FragmentRegistrationBinding
 
 class RegistrationFragment : Fragment() {
@@ -30,10 +31,13 @@ class RegistrationFragment : Fragment() {
             binding.editPassword.text.toString() == "admin"
         ) {
             Toast.makeText(requireContext(), "Вход выполнен!", Toast.LENGTH_SHORT).show()
-            requireActivity().supportFragmentManager.beginTransaction()
+            findNavController().navigate(R.id.mainFragment)
+          //  binding.errorMsg.visibility = View.VISIBLE
+
+          /* requireActivity().supportFragmentManager.beginTransaction()
                 .addToBackStack(null)
-                .replace(R.id.activity_main, MainFragment.newInstance())
-                .commit()
+                 .replace(R.id.activity_main, MainFragment.newInstance())
+                .commit()*/
         } else {
             Toast.makeText(requireContext(), "Неправильные данные!", Toast.LENGTH_SHORT)
                 .show()

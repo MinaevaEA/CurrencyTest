@@ -4,17 +4,11 @@
     app:startDestination="@id/mainFragment">
     <item
         android:id="@id/mainFragment"
-
-        android:title="Albums" />
-
+        android:title="Главная" />
     <item
         android:id="@id/buyCurrencyListFragment"
-
-        android:title="Favourites" />
-
+        android:title="Покупки" />
     <item
         android:id="@id/currencyListFragment"
-
-        android:title="Account" />
-
+        android:title="Список валют" />
 </menu>

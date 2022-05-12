@@ -15,12 +15,12 @@ class CurrencyListViewModel(private val storageDataNetwork: DataNetworkInteract)
     val errorTextViewVisibility = MutableLiveData<Boolean>()
     val currencyListAdapterVisibility = MutableLiveData<Boolean>()
     val onCurrencyClickedEvent = SingleLiveEvent<String>()
-    var fullCurrenciesList = ArrayList<DataCurrency>()
+    var fullCurrenciesList = mutableListOf<DataCurrency>()
     private fun setDataNetwork() {
         viewModelScope.launch {
             try {
                 val listCurrenciesResponse = storageDataNetwork.currencyListInteractor()
-                fullCurrenciesList = listCurrenciesResponse as ArrayList<DataCurrency>
+                fullCurrenciesList.addAll(listCurrenciesResponse)
                 loadingListCurrency.postValue(fullCurrenciesList)
                 currencyListAdapterVisibility.postValue(true)
 
@@ -36,23 +36,10 @@ class CurrencyListViewModel(private val storageDataNetwork: DataNetworkInteract)
     }
 
     fun searchNotes(query: String?) {
-        val filteredList = ArrayList<DataCurrency>()
-        if (query?.isNotEmpty() == true) {
-            fullCurrenciesList.filter {
-                it.valute.contains(
-                    other = query,
-                    ignoreCase = false
-                ) //or it.country.contains(other = query, ignoreCase = false)
-            }
-                .forEach { filteredList.add(it) }
-            fullCurrenciesList = filteredList
-            Log.d("listDebug", "searchNotes: ${fullCurrenciesList.size}")
-            loadingListCurrency.value = fullCurrenciesList
-
-        } else {
-
-            setDataNetwork()
+        val filteredList = fullCurrenciesList.filter {
+            it.valute.contains(query!!, true)
         }
+        loadingListCurrency.postValue(filteredList)
     }
 
     init {

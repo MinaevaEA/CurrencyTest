@@ -5,6 +5,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import com.example.currencytest.currency_buy.BuyCurrencyListFragment
 import com.example.currencytest.databinding.FragmentMainBinding
 import com.example.currencytest.currency_list.CurrencyListFragment
@@ -22,17 +24,20 @@ class MainFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.btnCurrency.setOnClickListener {
-            requireActivity().supportFragmentManager.beginTransaction()
+            findNavController().navigate(R.id.currencyListFragment)
+            /*requireActivity().supportFragmentManager.beginTransaction()
                 .addToBackStack(null)
                 .replace(R.id.activity_main, CurrencyListFragment.newInstance())
-                .commit()
+                .commit()*/
         }
         binding.buy.setOnClickListener {
-            requireActivity().supportFragmentManager.beginTransaction()
+            findNavController().navigate(R.id.buyCurrencyListFragment)
+            /*requireActivity().supportFragmentManager.beginTransaction()
                 .addToBackStack(null)
                 .replace(R.id.activity_main, BuyCurrencyListFragment.newInstance())
-                .commit()
+                .commit()*/
         }
+
     }
 
     companion object {

@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/registrationFragment2"
+    app:startDestination="@id/registrationFragment"
     tools:ignore="InvalidNavigation">
 
     <fragment
@@ -19,16 +19,22 @@
     <fragment
         android:id="@+id/currencyListFragment"
         android:name="com.example.currencytest.currency_list.CurrencyListFragment"
-        android:label="CurrencyListFragment" />
+        android:label="CurrencyListFragment">
+    <action android:id="@+id/action_currency_list_to_about"
+        app:destination="@id/fragment_about_currency"
+        app:popUpTo="@+id/mainFragment"
+        app:popUpToInclusive="true"/>
+    </fragment>
     <fragment
-        android:id="@+id/registrationFragment2"
+        android:id="@+id/registrationFragment"
         android:name="com.example.currencytest.RegistrationFragment"
         android:label="fragment_registration"
         tools:layout="@layout/fragment_registration" />
-    <activity
-        android:id="@+id/splashActivityOne2"
-        android:name="com.example.currencytest.SplashActivityOne"
-        android:label="activity_splash_one"
-        tools:layout="@layout/activity_splash_one" />
+    <fragment
+        android:id="@+id/fragment_about_currency"
+        android:name="com.example.currencytest.RegistrationFragment"
+        android:label="CurrencyFragment"
+
+       />
 
 </navigation>

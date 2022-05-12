@@ -125,6 +125,16 @@ class CurrencyFragment : Fragment() {
             arguments = Bundle().apply { putString(TAG_FOR_CURRENCY, currency) }
         }
 
+      /*  fun newInst2(currency: String): Bundle = Bundle().apply {
+            putString(TAG_FOR_CURRENCY, currency)
+        }*/
+
+        fun newInst3(currency: String): Bundle {
+            val b = Bundle()
+            b.putString(TAG_FOR_CURRENCY, currency)
+            return b
+        }
+
 /*        fun newInsta2(currency: String): CurrencyFragment {
             val i = CurrencyFragment()
             val b = Bundle()
