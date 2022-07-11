@@ -1,3 +1,4 @@
+/*
 package com.example.currencytest.dagger
 
 import android.app.Application
@@ -45,4 +46,4 @@ class AppModule (private val application: Application) {
     fun provideApi(retrofit: Retrofit): RetrofitServices {
         return retrofit.create(RetrofitServices::class.java)
     }
-}
+}*/

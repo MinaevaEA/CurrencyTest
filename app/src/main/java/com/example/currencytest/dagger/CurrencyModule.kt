@@ -1,3 +1,4 @@
+/*
 package com.example.currencytest.dagger
 
 import com.example.currencytest.currency.CurrencyFragment
@@ -24,8 +25,10 @@ class CurrencyModule {
             currencyFragment.arguments?.getString(TAG_FOR_CURRENCY, "") ?: ""
         return bundle
     }
-    /*@Provides
+    */
+/*@Provides
     fun provideCurrencyFragmentView(currencyFragment: CurrencyFragment): CurrencyFragment {
         return currencyFragment
-    }*/
-}
+    }*//*
+
+}*/

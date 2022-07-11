@@ -14,26 +14,16 @@ import com.example.currencytest.R
 import com.example.currencytest.databinding.FragmentAboutCurrencyBinding
 import com.example.currencytest.SubApplication
 import com.example.currencytest.currency_list.CurrencyDetail
-import com.example.currencytest.dagger.CurrencyModule
-import com.example.currencytest.db.AppDatabase
 import com.example.currencytest.retrofit.RetrofitServices
 import com.google.android.material.snackbar.Snackbar
-import javax.inject.Inject
+import retrofit2.create
+
 
 class CurrencyFragment : Fragment() {
     private lateinit var binding: FragmentAboutCurrencyBinding
     private lateinit var currencyViewModel: CurrencyViewModel
+    private lateinit var currency: String
 
-    lateinit var currency: String
-
-    @Inject
-    lateinit var dataBase: AppDatabase
-
-    @Inject
-    lateinit var dataConcreteCurrency: RetrofitServices
-
-    @Inject
-    lateinit var storageDataCurrency: CurrencyInteract
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -43,10 +33,13 @@ class CurrencyFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val appComponent = (requireContext().applicationContext as SubApplication).appComponent
-        appComponent.getCurrencyComponent().injectCurrencyFragment(this)
-      //  currency = arguments?.getString(TAG_FOR_CURRENCY, "") ?: ""
-
+        val dataBase =
+            (requireContext().applicationContext as SubApplication).provideDataBase()
+        currency = arguments?.getString(TAG_FOR_CURRENCY, "") ?: ""
+        val dataConcreteCurrency: RetrofitServices =
+            (requireContext().applicationContext as SubApplication).provideDataFromNetwork()
+                .create()
+        val storageDataCurrency = CurrencyInteract(dataConcreteCurrency, dataBase)
         val viewModelFactory = CurrencyViewModelFactory(storageDataCurrency, currency)
         currencyViewModel = ViewModelProvider(this, viewModelFactory)[CurrencyViewModel::class.java]
         currencyViewModel.onCreate()

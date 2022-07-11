@@ -1,3 +1,4 @@
+/*
 package com.example.currencytest.dagger
 
 
@@ -7,4 +8,4 @@ import dagger.Subcomponent
 @Subcomponent(modules = [CurrencyModule::class])
 interface CurrencyComponent {
     fun injectCurrencyFragment(CurrencyFragment: CurrencyFragment)
-}
+}*/

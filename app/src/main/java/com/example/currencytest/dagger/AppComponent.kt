@@ -1,3 +1,4 @@
+/*
 package com.example.currencytest.dagger
 
 
@@ -15,4 +16,4 @@ interface AppComponent {
 
    }
 
-}
+}*/
