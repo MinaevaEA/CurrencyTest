@@ -9,19 +9,31 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.example.currencytest.R
 import com.example.currencytest.databinding.FragmentAboutCurrencyBinding
 import com.example.currencytest.SubApplication
-import com.example.currencytest.currency_buy.BuyCurrencyListFragment
 import com.example.currencytest.currency_list.CurrencyDetail
+import com.example.currencytest.dagger.CurrencyModule
+import com.example.currencytest.db.AppDatabase
 import com.example.currencytest.retrofit.RetrofitServices
 import com.google.android.material.snackbar.Snackbar
-import retrofit2.create
+import javax.inject.Inject
 
 class CurrencyFragment : Fragment() {
     private lateinit var binding: FragmentAboutCurrencyBinding
     private lateinit var currencyViewModel: CurrencyViewModel
-    private lateinit var currency: String
+
+    lateinit var currency: String
+
+    @Inject
+    lateinit var dataBase: AppDatabase
+
+    @Inject
+    lateinit var dataConcreteCurrency: RetrofitServices
+
+    @Inject
+    lateinit var storageDataCurrency: CurrencyInteract
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -31,13 +43,10 @@ class CurrencyFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val dataBase =
-            (requireContext().applicationContext as SubApplication).provideDataBase()
-        currency = arguments?.getString(TAG_FOR_CURRENCY, "") ?: ""
-        val dataConcreteCurrency: RetrofitServices =
-            (requireContext().applicationContext as SubApplication).provideDataFromNetwork()
-                .create()
-        val storageDataCurrency = CurrencyInteract(dataConcreteCurrency, dataBase)
+        val appComponent = (requireContext().applicationContext as SubApplication).appComponent
+        appComponent.getCurrencyComponent().injectCurrencyFragment(this)
+      //  currency = arguments?.getString(TAG_FOR_CURRENCY, "") ?: ""
+
         val viewModelFactory = CurrencyViewModelFactory(storageDataCurrency, currency)
         currencyViewModel = ViewModelProvider(this, viewModelFactory)[CurrencyViewModel::class.java]
         currencyViewModel.onCreate()
@@ -66,10 +75,11 @@ class CurrencyFragment : Fragment() {
     }
 
     private fun goToMain() {
-        requireActivity().supportFragmentManager.beginTransaction()
+        findNavController().navigate(R.id.buyCurrencyListFragment)
+        /*requireActivity().supportFragmentManager.beginTransaction()
             .addToBackStack(null)
             .replace(R.id.activity_main, BuyCurrencyListFragment.newInstance())
-            .commit()
+            .commit()*/
     }
 
     private fun setVisibility(isVisible: Boolean, view: View) {
@@ -125,9 +135,9 @@ class CurrencyFragment : Fragment() {
             arguments = Bundle().apply { putString(TAG_FOR_CURRENCY, currency) }
         }
 
-      /*  fun newInst2(currency: String): Bundle = Bundle().apply {
-            putString(TAG_FOR_CURRENCY, currency)
-        }*/
+        /*  fun newInst2(currency: String): Bundle = Bundle().apply {
+              putString(TAG_FOR_CURRENCY, currency)
+          }*/
 
         fun newInst3(currency: String): Bundle {
             val b = Bundle()

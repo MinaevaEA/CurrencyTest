@@ -5,19 +5,16 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
-import com.example.currencytest.currency_buy.BuyCurrencyListFragment
-import com.example.currencytest.databinding.FragmentMainBinding
-import com.example.currencytest.currency_list.CurrencyListFragment
+import com.example.currencytest.databinding.FragmentMenuBinding
 
 
-class MainFragment : Fragment() {
-    private lateinit var binding: FragmentMainBinding
+class MenuFragment : Fragment() {
+    private lateinit var binding: FragmentMenuBinding
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View = FragmentMainBinding.inflate(inflater, container, false).also {
+    ): View = FragmentMenuBinding.inflate(inflater, container, false).also {
         binding = it
     }.root
 
@@ -41,7 +38,7 @@ class MainFragment : Fragment() {
     }
 
     companion object {
-        fun newInstance(): MainFragment = MainFragment()
+        fun newInstance(): MenuFragment = MenuFragment()
     }
 }
 

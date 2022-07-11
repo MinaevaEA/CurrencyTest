@@ -18,8 +18,10 @@
     <string name="price">Цена(руб.)</string>
     <string name="date">Дата</string>
     <string name="buy_value">Введите кол-во</string>
-        <!-- HEADER -->
+    <!-- HEADER -->
     <string name="hello">Здравствуйте!</string>
     <string name="authorization">Вход</string>
     <string name="error_msg">Что-то пошло не так!</string>
-   </resources>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>

@@ -1,12 +1,12 @@
 package com.example.currencytest
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.*
-import androidx.navigation.fragment.findNavController
 import com.example.currencytest.databinding.FragmentRegistrationBinding
 
 class RegistrationFragment : Fragment() {
@@ -31,12 +31,11 @@ class RegistrationFragment : Fragment() {
             binding.editPassword.text.toString() == "admin"
         ) {
             Toast.makeText(requireContext(), "Вход выполнен!", Toast.LENGTH_SHORT).show()
-            findNavController().navigate(R.id.mainFragment)
-          //  binding.errorMsg.visibility = View.VISIBLE
-
-          /* requireActivity().supportFragmentManager.beginTransaction()
+            val intent = Intent(requireActivity(), ActivityForNavFragments::class.java)
+            startActivity(intent)
+           /* requireActivity().supportFragmentManager.beginTransaction()
                 .addToBackStack(null)
-                 .replace(R.id.activity_main, MainFragment.newInstance())
+                .replace(R.id.activity_main, MenuFragment.newInstance())
                 .commit()*/
         } else {
             Toast.makeText(requireContext(), "Неправильные данные!", Toast.LENGTH_SHORT)

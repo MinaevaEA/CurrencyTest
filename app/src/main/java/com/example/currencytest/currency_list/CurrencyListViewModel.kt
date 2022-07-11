@@ -21,6 +21,7 @@ class CurrencyListViewModel(private val storageDataNetwork: DataNetworkInteract)
             try {
                 val listCurrenciesResponse = storageDataNetwork.currencyListInteractor()
                 fullCurrenciesList.addAll(listCurrenciesResponse)
+                Log.d("1","listCurrenciesResponse")
                 loadingListCurrency.postValue(fullCurrenciesList)
                 currencyListAdapterVisibility.postValue(true)
 
@@ -38,7 +39,10 @@ class CurrencyListViewModel(private val storageDataNetwork: DataNetworkInteract)
     fun searchNotes(query: String?) {
         val filteredList = fullCurrenciesList.filter {
             it.valute.contains(query!!, true)
+            //TODO дополнить условия и переименовать loadingListCurrency
+
         }
+        Log.d("1","searchNotes")
         loadingListCurrency.postValue(filteredList)
     }
 

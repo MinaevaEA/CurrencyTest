@@ -3,14 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/registrationFragment"
+    app:startDestination="@id/menuFragment"
     tools:ignore="InvalidNavigation">
-
     <fragment
-        android:id="@+id/mainFragment"
-        android:name="com.example.currencytest.MainFragment"
-        android:label="fragment_main"
-        tools:layout="@layout/fragment_main" />
+        android:id="@+id/menuFragment"
+        android:name="com.example.currencytest.MenuFragment"
+        android:label="fragment_menu"
+        tools:layout="@layout/fragment_menu" />
     <fragment
         android:id="@+id/buyCurrencyListFragment"
         android:name="com.example.currencytest.currency_buy.BuyCurrencyListFragment"
@@ -25,15 +24,7 @@
             app:destination="@id/fragment_about_currency" />
     </fragment>
     <fragment
-        android:id="@+id/registrationFragment"
-        android:name="com.example.currencytest.RegistrationFragment"
-        android:label="fragment_registration"
-        tools:layout="@layout/fragment_registration" />
-    <fragment
         android:id="@+id/fragment_about_currency"
         android:name="com.example.currencytest.currency.CurrencyFragment"
-        android:label="CurrencyFragment"
-
-       />
-
+        android:label="CurrencyFragment" />
 </navigation>

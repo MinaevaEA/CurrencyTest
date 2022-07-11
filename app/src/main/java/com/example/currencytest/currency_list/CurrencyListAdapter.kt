@@ -1,6 +1,7 @@
 package com.example.currencytest.currency_list
 
 import android.annotation.SuppressLint
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.navigation.findNavController
@@ -22,6 +23,7 @@ class CurrencyListAdapter(
     fun setData(newList: List<DataCurrency>) {
         dataSet.clear()
         dataSet.addAll(newList)
+        Log.d("1","setData")
         notifyDataSetChanged()
     }
 

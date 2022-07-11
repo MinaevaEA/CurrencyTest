@@ -14,6 +14,7 @@ interface RetrofitServices {
 
     @GET("latest/currencies/{valute}/rub.json")
     suspend fun getAboutCurrency(@Path("valute") valute: String): CurrencyDetail
+//это тоже на удаление)
 
     companion object {
         private const val baseUrl = "https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/"
