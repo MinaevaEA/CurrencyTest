@@ -8,6 +8,8 @@ import android.view.View.OnClickListener
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.currencytest.R
@@ -16,14 +18,15 @@ import com.example.currencytest.SubApplication
 import com.example.currencytest.currency_list.CurrencyDetail
 import com.example.currencytest.retrofit.RetrofitServices
 import com.google.android.material.snackbar.Snackbar
+import dagger.hilt.android.AndroidEntryPoint
 import retrofit2.create
 
-
+@AndroidEntryPoint
 class CurrencyFragment : Fragment() {
     private lateinit var binding: FragmentAboutCurrencyBinding
     private lateinit var currencyViewModel: CurrencyViewModel
     private lateinit var currency: String
-
+    val viewModel by viewModels<CurrencyViewModel>()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -31,18 +34,21 @@ class CurrencyFragment : Fragment() {
         binding = it
     }.root
 
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val dataBase =
+ /*       val dataBase =
             (requireContext().applicationContext as SubApplication).provideDataBase()
         currency = arguments?.getString(TAG_FOR_CURRENCY, "") ?: ""
         val dataConcreteCurrency: RetrofitServices =
             (requireContext().applicationContext as SubApplication).provideDataFromNetwork()
                 .create()
-        val storageDataCurrency = CurrencyInteract(dataConcreteCurrency, dataBase)
-        val viewModelFactory = CurrencyViewModelFactory(storageDataCurrency, currency)
-        currencyViewModel = ViewModelProvider(this, viewModelFactory)[CurrencyViewModel::class.java]
-        currencyViewModel.onCreate()
+
+
+        val storageDataCurrency = CurrencyInteract(dataConcreteCurrency, dataBase)*/
+            //val viewModelFactory = CurrencyViewModelFactory(storageDataCurrency, currency)
+       // currencyViewModel = ViewModelProvider(this, viewModelFactory)[CurrencyViewModel::class.java]
+        viewModel.onCreate()
         binding.title.text = currency
         initObs()
         binding.buyButton.setOnClickListener {

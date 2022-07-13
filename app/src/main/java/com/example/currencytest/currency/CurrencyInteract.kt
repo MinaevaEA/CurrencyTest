@@ -9,11 +9,11 @@ class CurrencyInteract(
     private val dataConcreteCurrency: RetrofitServices,
     private val database: AppDatabase
 ) {
-    suspend fun concreteCurrencyInteract(valute: String): CurrencyDetail {
+    suspend fun concreteCurrency(valute: String): CurrencyDetail {
         return dataConcreteCurrency.getAboutCurrency(valute)
     }
 
-    suspend fun insertCurrencyInteractor(currency: Currency): Long {
+    suspend fun insertCurrency(currency: Currency): Long {
         return database.currencyDao().insertAll(currency)
     }
 }

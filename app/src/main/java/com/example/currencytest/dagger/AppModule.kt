@@ -1,49 +1,37 @@
-/*
 package com.example.currencytest.dagger
 
-import android.app.Application
 import android.content.Context
 import androidx.room.Room
 import com.example.currencytest.db.AppDatabase
-import com.example.currencytest.db.CurrencyDao
 import com.example.currencytest.retrofit.RetrofitServices
 import dagger.Module
 import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
+import dagger.hilt.components.SingletonComponent
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.create
 
 
 @Module
-class AppModule (private val application: Application) {
-    private lateinit var dataFromNetwork: Retrofit
+@InstallIn(SingletonComponent::class)
+class AppModule {
     @Provides
-    fun providesApplicationContext(): Context = application
-
-    @Provides
-    fun providesApplication(): Application = application
-
-    @Provides
-    fun provideDataBase(context: Context): AppDatabase {
-      val dataBase = Room.databaseBuilder(
-          context,
+    fun provideDataBase(@ApplicationContext context: Context): AppDatabase {
+        val dataBase = Room.databaseBuilder(
+            context,
             AppDatabase::class.java, "database-name"
         ).build()
         return dataBase
     }
 
     @Provides
-    fun provideDataFromNetwork(): Retrofit {
+    fun provideDataFromNetwork(): RetrofitServices {
         val baseUrl = "https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/"
-            dataFromNetwork = Retrofit.Builder()
-                .baseUrl(baseUrl)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build()
-        return dataFromNetwork
-
+        return Retrofit.Builder()
+            .baseUrl(baseUrl)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+            .create(RetrofitServices::class.java)
     }
-    @Provides
-    fun provideApi(retrofit: Retrofit): RetrofitServices {
-        return retrofit.create(RetrofitServices::class.java)
-    }
-}*/
+}

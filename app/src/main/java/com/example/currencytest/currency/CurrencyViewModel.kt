@@ -4,13 +4,14 @@ import androidx.lifecycle.*
 import com.example.currencytest.currency_list.CurrencyDetail
 import com.example.currencytest.db.Currency
 import com.example.currencytest.utils.SingleLiveEvent
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
-import kotlin.math.floor
+import javax.inject.Inject
 
-
-class CurrencyViewModel(
+@HiltViewModel
+class CurrencyViewModel @Inject constructor(
     private val dataConcreteCurrency: CurrencyInteract,
-    private val value: String
+    savedStateHandle: SavedStateHandle
 ) :
     ViewModel() {
     val dataCurrency = MutableLiveData<CurrencyDetail>()
@@ -24,11 +25,15 @@ class CurrencyViewModel(
     val titleVisibility = MutableLiveData<Boolean>()
     val numberOfBuyVisibility = MutableLiveData<Boolean>()
     val buyButtonVisibility = MutableLiveData<Boolean>()
-
+    private  var argument: String = ""
+    init {
+        argument =
+            savedStateHandle.getLiveData(CurrencyFragment.TAG_FOR_CURRENCY, "").value ?: ""
+    }
     fun onCreate() {
         viewModelScope.launch {
             try {
-                val currency = dataConcreteCurrency.concreteCurrencyInteract(value)
+                val currency = dataConcreteCurrency.concreteCurrency(argument)
                 dataCurrency.postValue(currency)
                 progressBarVisibility.postValue(true)
                 priceVisibility.postValue(true)
@@ -54,7 +59,7 @@ class CurrencyViewModel(
             return
         }
         viewModelScope.launch {
-            val insertResult = dataConcreteCurrency.insertCurrencyInteractor(
+            val insertResult = dataConcreteCurrency.insertCurrency(
                 Currency(
                     title,
                     price,
@@ -70,12 +75,13 @@ class CurrencyViewModel(
             }
         }
     }
+
 }
 
 @Suppress("UNCHECKED_CAST")
 class CurrencyViewModelFactory(
-    private val interact: CurrencyInteract, private val value: String
+    private val interact: CurrencyInteract, private val savedStateHandle: SavedStateHandle
 ) : ViewModelProvider.NewInstanceFactory() {
     override fun <T : ViewModel> create(modelClass: Class<T>): T =
-        CurrencyViewModel(interact, value) as T
+        CurrencyViewModel(interact, savedStateHandle) as T
 }
