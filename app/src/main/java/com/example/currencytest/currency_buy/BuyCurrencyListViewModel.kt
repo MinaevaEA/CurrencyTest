@@ -5,10 +5,12 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.example.currencytest.db.Currency
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-
-class BuyCurrencyListViewModel(private val dataFromDataBase: BuyCurrencyListInteractor) :
+@HiltViewModel
+class BuyCurrencyListViewModel @Inject constructor(private val dataFromDataBase: BuyCurrencyListInteractor) :
     ViewModel() {
      val loadingListBuyCurrency = MutableLiveData<List<Currency>>()
     fun onViewCreatedBuy() {

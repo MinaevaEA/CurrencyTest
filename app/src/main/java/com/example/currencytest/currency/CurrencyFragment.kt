@@ -9,24 +9,19 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.currencytest.R
 import com.example.currencytest.databinding.FragmentAboutCurrencyBinding
-import com.example.currencytest.SubApplication
 import com.example.currencytest.currency_list.CurrencyDetail
-import com.example.currencytest.retrofit.RetrofitServices
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
-import retrofit2.create
 
 @AndroidEntryPoint
 class CurrencyFragment : Fragment() {
     private lateinit var binding: FragmentAboutCurrencyBinding
-    private lateinit var currencyViewModel: CurrencyViewModel
-    private lateinit var currency: String
-    val viewModel by viewModels<CurrencyViewModel>()
+   // private lateinit var currencyViewModel: CurrencyViewModel
+  //  private lateinit var currency: String
+    private val currencyViewModel by viewModels<CurrencyViewModel>()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -48,8 +43,8 @@ class CurrencyFragment : Fragment() {
         val storageDataCurrency = CurrencyInteract(dataConcreteCurrency, dataBase)*/
             //val viewModelFactory = CurrencyViewModelFactory(storageDataCurrency, currency)
        // currencyViewModel = ViewModelProvider(this, viewModelFactory)[CurrencyViewModel::class.java]
-        viewModel.onCreate()
-        binding.title.text = currency
+        currencyViewModel.onCreate()
+            //     binding.title.text =
         initObs()
         binding.buyButton.setOnClickListener {
 
@@ -92,6 +87,9 @@ class CurrencyFragment : Fragment() {
     }
 
     private fun initObs() {
+        currencyViewModel.argumentMain.observe(requireActivity()){
+            binding.title.text = it
+        }
         currencyViewModel.dataCurrency.observe(requireActivity()) {
             showCurrency(it)
         }

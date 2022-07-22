@@ -9,24 +9,35 @@
     <ImageView
         android:id="@+id/img_valute"
         style="@style/RecyclerImg"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@android:drawable/ic_menu_mapmode"
-        tools:ignore="ContentDescription,MissingConstraints" />
+        tools:ignore="ContentDescription,MissingConstraints"
+        tools:layout_editor_absoluteX="26dp" />
 
     <TextView
         android:id="@+id/title"
         style="@style/RecyclerTitle"
-        app:layout_constraintEnd_toStartOf="@+id/country"
+        android:layout_width="101dp"
+        android:layout_height="26dp"
+
+        android:layout_marginStart="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/img_valute"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.421"
         tools:ignore="MissingConstraints" />
 
     <TextView
         android:id="@+id/country"
         style="@style/RecyclerCountry"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="100dp"
-        android:layout_marginTop="12dp"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_width="207dp"
+        android:layout_height="27dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="4dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/title"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="MissingConstraints" />
 

@@ -8,7 +8,6 @@
     <TextView
         android:id="@+id/date_name"
         style="@style/ConcreteCurrencyTitle"
-
         android:layout_marginStart="12dp"
         android:layout_marginTop="8dp"
         android:text="@string/date"
@@ -120,11 +119,13 @@
         android:layout_height="wrap_content"
         android:indeterminateDrawable="@drawable/spinner"
         android:indeterminateOnly="true"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="MissingConstraints" />
+        tools:ignore="MissingConstraints"
+   />
 
     <TextView
         android:id="@+id/valute_name"

@@ -16,7 +16,7 @@ interface RetrofitServices {
     suspend fun getAboutCurrency(@Path("valute") valute: String): CurrencyDetail
 //это тоже на удаление)
 
-    companion object {
+    /*companion object {
         private const val baseUrl = "https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/"
         private var retrofit: Retrofit? = null
 
@@ -29,5 +29,5 @@ interface RetrofitServices {
             }
             return retrofit!!
         }
-    }
+    }*/
 }

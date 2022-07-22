@@ -6,22 +6,25 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.example.currencytest.utils.SingleLiveEvent
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-
-class CurrencyListViewModel(private val storageDataNetwork: DataNetworkInteract) : ViewModel() {
+@HiltViewModel
+class CurrencyListViewModel @Inject constructor(private val storageDataNetwork: DataNetworkInteract) :
+    ViewModel() {
     val loadingListCurrency = MutableLiveData<List<DataCurrency>>()
     val progressBarVisibility = MutableLiveData<Boolean>()
     val errorTextViewVisibility = MutableLiveData<Boolean>()
     val currencyListAdapterVisibility = MutableLiveData<Boolean>()
     val onCurrencyClickedEvent = SingleLiveEvent<String>()
-    var fullCurrenciesList = mutableListOf<DataCurrency>()
+    private var fullCurrenciesList = mutableListOf<DataCurrency>()
     private fun setDataNetwork() {
         viewModelScope.launch {
             try {
                 val listCurrenciesResponse = storageDataNetwork.currencyListInteractor()
                 fullCurrenciesList.addAll(listCurrenciesResponse)
-                Log.d("1","listCurrenciesResponse")
+                Log.d("1", "listCurrenciesResponse")
                 loadingListCurrency.postValue(fullCurrenciesList)
                 currencyListAdapterVisibility.postValue(true)
 
@@ -39,10 +42,8 @@ class CurrencyListViewModel(private val storageDataNetwork: DataNetworkInteract)
     fun searchNotes(query: String?) {
         val filteredList = fullCurrenciesList.filter {
             it.valute.contains(query!!, true)
-            //TODO дополнить условия и переименовать loadingListCurrency
-
         }
-        Log.d("1","searchNotes")
+        Log.d("1", "searchNotes")
         loadingListCurrency.postValue(filteredList)
     }
 

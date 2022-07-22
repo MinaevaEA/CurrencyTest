@@ -17,7 +17,7 @@ class SubApplication : Application() {
     private lateinit var dataFromNetwork: Retrofit
     override fun onCreate() {
         super.onCreate()
-        dataBase = Room.databaseBuilder(
+        /*     dataBase = Room.databaseBuilder(
             this,
             AppDatabase::class.java, "database-name"
         ).build()
@@ -31,8 +31,8 @@ class SubApplication : Application() {
     //на удаление
     fun provideDataBase(): AppDatabase {
         return dataBase
+    }*/
     }
-
 }
 
 

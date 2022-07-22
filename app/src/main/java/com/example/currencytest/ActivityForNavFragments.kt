@@ -6,8 +6,9 @@ import android.os.Bundle
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.currencytest.databinding.ActivityForNavBinding
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class ActivityForNavFragments : AppCompatActivity() {
     private lateinit var binding: ActivityForNavBinding
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -25,6 +25,7 @@ class CurrencyViewModel @Inject constructor(
     val titleVisibility = MutableLiveData<Boolean>()
     val numberOfBuyVisibility = MutableLiveData<Boolean>()
     val buyButtonVisibility = MutableLiveData<Boolean>()
+    val argumentMain = MutableLiveData<String>()
     private  var argument: String = ""
     init {
         argument =
@@ -34,8 +35,8 @@ class CurrencyViewModel @Inject constructor(
         viewModelScope.launch {
             try {
                 val currency = dataConcreteCurrency.concreteCurrency(argument)
+                argumentMain.postValue(argument)
                 dataCurrency.postValue(currency)
-                progressBarVisibility.postValue(true)
                 priceVisibility.postValue(true)
                 dateVisibility.postValue(true)
                 titleVisibility.postValue(true)

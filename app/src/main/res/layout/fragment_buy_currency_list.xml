@@ -8,9 +8,10 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewBuy"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="417dp"
+        android:layout_height="608dp"
         app:layout_constraintEnd_toEndOf="parent"
-        tools:listitem="@layout/item_buy_currency" />
+        tools:listitem="@layout/item_buy_currency"
+        tools:ignore="MissingConstraints" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

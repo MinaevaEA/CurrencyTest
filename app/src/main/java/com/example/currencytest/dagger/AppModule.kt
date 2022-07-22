@@ -18,11 +18,10 @@ import retrofit2.converter.gson.GsonConverterFactory
 class AppModule {
     @Provides
     fun provideDataBase(@ApplicationContext context: Context): AppDatabase {
-        val dataBase = Room.databaseBuilder(
+        return Room.databaseBuilder(
             context,
             AppDatabase::class.java, "database-name"
         ).build()
-        return dataBase
     }
 
     @Provides

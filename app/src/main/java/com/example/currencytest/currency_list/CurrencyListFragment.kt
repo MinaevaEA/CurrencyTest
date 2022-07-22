@@ -9,21 +9,25 @@ import android.view.ViewGroup
 import android.widget.SearchView
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.currencytest.R
 import com.example.currencytest.SubApplication
 import com.example.currencytest.currency.CurrencyFragment
+import com.example.currencytest.currency.CurrencyViewModel
 import com.example.currencytest.databinding.FragmentCurrencyListBinding
 import com.example.currencytest.retrofit.RetrofitServices
+import dagger.hilt.android.AndroidEntryPoint
 import retrofit2.*
 
-
+@AndroidEntryPoint
 class CurrencyListFragment : Fragment(), CurrencyViewListener {
     private lateinit var binding: FragmentCurrencyListBinding
-    private lateinit var currencyListViewModel: CurrencyListViewModel
+    //private lateinit var currencyListViewModel: CurrencyListViewModel
     private lateinit var adapter: CurrencyListAdapter
+    private val currencyListViewModel by viewModels<CurrencyListViewModel>()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -33,13 +37,13 @@ class CurrencyListFragment : Fragment(), CurrencyViewListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val dataFromNetwork: RetrofitServices =
+       /* val dataFromNetwork: RetrofitServices =
             (requireContext().applicationContext as SubApplication).provideDataFromNetwork()
                 .create()
         val storageDataNetwork = DataNetworkInteract(dataFromNetwork)
         val viewModelFactory = CurrencyListViewModelFactory(storageDataNetwork)
         currencyListViewModel =
-            ViewModelProvider(this, viewModelFactory)[CurrencyListViewModel::class.java]
+            ViewModelProvider(this, viewModelFactory)[CurrencyListViewModel::class.java]*/
         adapter = CurrencyListAdapter(this)
         binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
         binding.recyclerView.adapter = adapter
@@ -53,7 +57,6 @@ class CurrencyListFragment : Fragment(), CurrencyViewListener {
 
             override fun onQueryTextChange(newText: String?): Boolean {
                 currencyListViewModel.searchNotes(newText)
-                //TODO не работает поиск
                 return true
             }
         })
