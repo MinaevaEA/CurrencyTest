@@ -1,8 +1,6 @@
 package com.example.currencytest.currency_buy
 
-import com.example.currencytest.currency.CurrencyInteract
 import com.example.currencytest.db.AppDatabase
-import com.example.currencytest.retrofit.RetrofitServices
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -14,7 +12,7 @@ class BuyCurrencyModule {
     @Provides
     fun getBuyCurrencyInteract(
         database: AppDatabase
-    ): BuyCurrencyListInteractor {
-        return BuyCurrencyListInteractor(database)
+    ): BuyCurrencyListInteract {
+        return BuyCurrencyListInteract(database)
     }
 }

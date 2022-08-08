@@ -9,7 +9,7 @@ import com.example.currencytest.db.Currency
 import java.util.ArrayList
 
 
-class AdapterBuyCurrency:
+class AdapterBuyCurrency :
     RecyclerView.Adapter<AdapterBuyCurrency.BuyViewHolder>() {
     private var dataSetCurrency = ArrayList<Currency>()
 
@@ -40,9 +40,7 @@ class AdapterBuyCurrency:
 
     override fun onBindViewHolder(holder: BuyViewHolder, position: Int) {
         holder.bind(dataSetCurrency[position])
-
     }
 
     override fun getItemCount() = dataSetCurrency.size
-
 }

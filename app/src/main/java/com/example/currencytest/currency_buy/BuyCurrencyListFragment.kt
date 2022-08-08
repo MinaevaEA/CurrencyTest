@@ -7,18 +7,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.currencytest.databinding.FragmentBuyCurrencyListBinding
-import com.example.currencytest.SubApplication
-import com.example.currencytest.currency.CurrencyViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class BuyCurrencyListFragment : Fragment() {
     private lateinit var binding: FragmentBuyCurrencyListBinding
     private lateinit var adapter: AdapterBuyCurrency
-   // private lateinit var buyCurrencyViewModel: BuyCurrencyListViewModel
     private val buyCurrencyViewModel by viewModels<BuyCurrencyListViewModel>()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -29,12 +25,6 @@ class BuyCurrencyListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-       /* val dataBase =
-            (requireContext().applicationContext as SubApplication).provideDataBase()
-        val storageDataBuyCurrency = BuyCurrencyListInteractor(dataBase)
-        val viewModelFactory = BuyCurrencyListViewModelFactory(storageDataBuyCurrency)
-        buyCurrencyViewModel =
-            ViewModelProvider(this, viewModelFactory)[BuyCurrencyListViewModel::class.java]*/
         adapter = AdapterBuyCurrency()
         buyCurrencyViewModel.onViewCreatedBuy()
         binding.recyclerViewBuy.layoutManager = LinearLayoutManager(requireContext())
@@ -47,9 +37,9 @@ class BuyCurrencyListFragment : Fragment() {
             adapter.setDataCurrency(it)
         }
     }
-
+    //TODO на удаление
+/*
     companion object {
         fun newInstance(): BuyCurrencyListFragment = BuyCurrencyListFragment()
-    }
-
+    }*/
 }

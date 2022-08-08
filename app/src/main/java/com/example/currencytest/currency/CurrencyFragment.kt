@@ -4,7 +4,6 @@ package com.example.currencytest.currency
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
-import android.view.View.OnClickListener
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
@@ -19,8 +18,6 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class CurrencyFragment : Fragment() {
     private lateinit var binding: FragmentAboutCurrencyBinding
-   // private lateinit var currencyViewModel: CurrencyViewModel
-  //  private lateinit var currency: String
     private val currencyViewModel by viewModels<CurrencyViewModel>()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -29,25 +26,11 @@ class CurrencyFragment : Fragment() {
         binding = it
     }.root
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
- /*       val dataBase =
-            (requireContext().applicationContext as SubApplication).provideDataBase()
-        currency = arguments?.getString(TAG_FOR_CURRENCY, "") ?: ""
-        val dataConcreteCurrency: RetrofitServices =
-            (requireContext().applicationContext as SubApplication).provideDataFromNetwork()
-                .create()
-
-
-        val storageDataCurrency = CurrencyInteract(dataConcreteCurrency, dataBase)*/
-            //val viewModelFactory = CurrencyViewModelFactory(storageDataCurrency, currency)
-       // currencyViewModel = ViewModelProvider(this, viewModelFactory)[CurrencyViewModel::class.java]
         currencyViewModel.onCreate()
-            //     binding.title.text =
         initObs()
         binding.buyButton.setOnClickListener {
-
             val title = binding.title.text
             val numberOfBuy = binding.numberOfBuy.text.toString().toIntOrNull() ?: 0
             val price = binding.country.text.toString().toDoubleOrNull() ?: 0.0
@@ -63,17 +46,16 @@ class CurrencyFragment : Fragment() {
 
     private fun openSnackBar() {
         Snackbar.make(binding.root, "Покупка произведена!", Snackbar.LENGTH_LONG)
-            .setAction("Перейти к покупкам", OnClickListener {
+            .setAction("Перейти к покупкам") {
                 currencyViewModel.onClickedSnackBar()
-            }).show()
+            }.show()
     }
 
-    private fun goToMain() {
+    private fun goToBuyList() {
         findNavController().navigate(R.id.buyCurrencyListFragment)
-        /*requireActivity().supportFragmentManager.beginTransaction()
-            .addToBackStack(null)
-            .replace(R.id.activity_main, BuyCurrencyListFragment.newInstance())
-            .commit()*/
+    }
+    private fun goToMain() {
+        findNavController().navigate(R.id.currencyListFragment)
     }
 
     private fun setVisibility(isVisible: Boolean, view: View) {
@@ -86,8 +68,9 @@ class CurrencyFragment : Fragment() {
         binding.date.text = currency.date
     }
 
+    //TODO сократить подписки
     private fun initObs() {
-        currencyViewModel.argumentMain.observe(requireActivity()){
+        currencyViewModel.argumentMain.observe(requireActivity()) {
             binding.title.text = it
         }
         currencyViewModel.dataCurrency.observe(requireActivity()) {
@@ -121,7 +104,10 @@ class CurrencyFragment : Fragment() {
         currencyViewModel.showSnackBar.observe(requireActivity()) {
             openSnackBar()
         }
-        currencyViewModel.backToMain.observe(requireActivity()) {
+        currencyViewModel.clinkedToBuyList.observe(requireActivity()) {
+            goToBuyList()
+        }
+        currencyViewModel.clinkedToMain.observe(requireActivity()) {
             goToMain()
         }
     }
@@ -132,23 +118,10 @@ class CurrencyFragment : Fragment() {
             arguments = Bundle().apply { putString(TAG_FOR_CURRENCY, currency) }
         }
 
-        /*  fun newInst2(currency: String): Bundle = Bundle().apply {
-              putString(TAG_FOR_CURRENCY, currency)
-          }*/
-
-        fun newInst3(currency: String): Bundle {
+        fun newInstanceBundle(currency: String): Bundle {
             val b = Bundle()
             b.putString(TAG_FOR_CURRENCY, currency)
             return b
         }
-
-/*        fun newInsta2(currency: String): CurrencyFragment {
-            val i = CurrencyFragment()
-            val b = Bundle()
-            b.putString(TAG_FOR_CURRENCY, currency)
-            i.arguments = b
-
-            return i
-        }*/
     }
 }

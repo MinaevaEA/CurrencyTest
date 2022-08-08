@@ -15,12 +15,6 @@ class ActivityForNavFragments : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityForNavBinding.inflate(layoutInflater)
         setContentView(binding.root)
-       /* if (savedInstanceState == null) {
-            supportFragmentManager.beginTransaction()
-                .addToBackStack(null)
-                .replace(R.id.activity_for_nav, MenuFragment.newInstance())
-                .commit()
-        }*/
         val navController = this.findNavController(R.id.fragment)
         binding.bottomNavView.setupWithNavController(navController)
         binding.bottomNavView.setOnItemReselectedListener { item ->

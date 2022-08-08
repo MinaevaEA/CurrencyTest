@@ -33,10 +33,12 @@ class RegistrationFragment : Fragment() {
             Toast.makeText(requireContext(), "Вход выполнен!", Toast.LENGTH_SHORT).show()
             val intent = Intent(requireActivity(), ActivityForNavFragments::class.java)
             startActivity(intent)
-           /* requireActivity().supportFragmentManager.beginTransaction()
-                .addToBackStack(null)
-                .replace(R.id.activity_main, MenuFragment.newInstance())
-                .commit()*/
+            //TODO на удаление
+
+            /* requireActivity().supportFragmentManager.beginTransaction()
+                 .addToBackStack(null)
+                 .replace(R.id.activity_main, MenuFragment.newInstance())
+                 .commit()*/
         } else {
             Toast.makeText(requireContext(), "Неправильные данные!", Toast.LENGTH_SHORT)
                 .show()

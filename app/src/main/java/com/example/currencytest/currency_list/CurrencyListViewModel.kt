@@ -3,7 +3,6 @@ package com.example.currencytest.currency_list
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.example.currencytest.utils.SingleLiveEvent
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -19,15 +18,19 @@ class CurrencyListViewModel @Inject constructor(private val storageDataNetwork: 
     val currencyListAdapterVisibility = MutableLiveData<Boolean>()
     val onCurrencyClickedEvent = SingleLiveEvent<String>()
     private var fullCurrenciesList = mutableListOf<DataCurrency>()
+
+    init {
+        setDataNetwork()
+    }
+
     private fun setDataNetwork() {
         viewModelScope.launch {
             try {
-                val listCurrenciesResponse = storageDataNetwork.currencyListInteractor()
+                val listCurrenciesResponse = storageDataNetwork.currencyListInteract()
                 fullCurrenciesList.addAll(listCurrenciesResponse)
                 Log.d("1", "listCurrenciesResponse")
                 loadingListCurrency.postValue(fullCurrenciesList)
                 currencyListAdapterVisibility.postValue(true)
-
             } catch (e: Exception) {
                 progressBarVisibility.postValue(false)
                 errorTextViewVisibility.postValue(false)
@@ -43,19 +46,15 @@ class CurrencyListViewModel @Inject constructor(private val storageDataNetwork: 
         val filteredList = fullCurrenciesList.filter {
             it.valute.contains(query!!, true)
         }
-        Log.d("1", "searchNotes")
         loadingListCurrency.postValue(filteredList)
     }
-
-    init {
-        setDataNetwork()
-    }
 }
-
+//TODO на удаление
+/*
 @Suppress("UNCHECKED_CAST")
 class CurrencyListViewModelFactory(
     private val interact: DataNetworkInteract
 ) : ViewModelProvider.NewInstanceFactory() {
     override fun <T : ViewModel> create(modelClass: Class<T>): T =
         CurrencyListViewModel(interact) as T
-}
+}*/

@@ -19,18 +19,21 @@ class CurrencyViewModel @Inject constructor(
     val progressBarVisibility = MutableLiveData<Boolean>()
     val showToast = MutableLiveData<String>()
     val showSnackBar = MutableLiveData<Unit>()
-    val backToMain = SingleLiveEvent<Unit>()
+    val clinkedToBuyList = SingleLiveEvent<Unit>()
+    val clinkedToMain = SingleLiveEvent<Unit>()
     val priceVisibility = MutableLiveData<Boolean>()
     val dateVisibility = MutableLiveData<Boolean>()
     val titleVisibility = MutableLiveData<Boolean>()
     val numberOfBuyVisibility = MutableLiveData<Boolean>()
     val buyButtonVisibility = MutableLiveData<Boolean>()
     val argumentMain = MutableLiveData<String>()
-    private  var argument: String = ""
+    private var argument: String = ""
+
     init {
         argument =
             savedStateHandle.getLiveData(CurrencyFragment.TAG_FOR_CURRENCY, "").value ?: ""
     }
+
     fun onCreate() {
         viewModelScope.launch {
             try {
@@ -49,7 +52,7 @@ class CurrencyViewModel @Inject constructor(
     }
 
     fun onClickedSnackBar() {
-        backToMain.postValue(Unit)
+        clinkedToBuyList.postValue(Unit)
     }
 
     fun onClickedBuyCurrency(
@@ -66,7 +69,8 @@ class CurrencyViewModel @Inject constructor(
                     price,
                     number,
                     date,
-                    generalSumm = (price.toDouble() * number))
+                    generalSumm = (price.toDouble() * number)
+                )
             )
             //Это значение, которое показывает была ли произведена транзакция в бд
             if (insertResult > 0) {
@@ -76,13 +80,13 @@ class CurrencyViewModel @Inject constructor(
             }
         }
     }
-
 }
-
+//TODO на удаление
+/*
 @Suppress("UNCHECKED_CAST")
 class CurrencyViewModelFactory(
     private val interact: CurrencyInteract, private val savedStateHandle: SavedStateHandle
 ) : ViewModelProvider.NewInstanceFactory() {
     override fun <T : ViewModel> create(modelClass: Class<T>): T =
         CurrencyViewModel(interact, savedStateHandle) as T
-}
+}*/

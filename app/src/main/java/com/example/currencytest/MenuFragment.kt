@@ -22,6 +22,7 @@ class MenuFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         binding.btnCurrency.setOnClickListener {
             findNavController().navigate(R.id.currencyListFragment)
+            //TODO на удаление
             /*requireActivity().supportFragmentManager.beginTransaction()
                 .addToBackStack(null)
                 .replace(R.id.activity_main, CurrencyListFragment.newInstance())
@@ -29,6 +30,7 @@ class MenuFragment : Fragment() {
         }
         binding.buy.setOnClickListener {
             findNavController().navigate(R.id.buyCurrencyListFragment)
+            //TODO на удаление
             /*requireActivity().supportFragmentManager.beginTransaction()
                 .addToBackStack(null)
                 .replace(R.id.activity_main, BuyCurrencyListFragment.newInstance())

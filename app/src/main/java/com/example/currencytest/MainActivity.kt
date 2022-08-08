@@ -19,13 +19,6 @@ class MainActivity : AppCompatActivity() {
                 .addToBackStack(null)
                 .replace(R.id.activity_main, RegistrationFragment.newInstance())
                 .commit()
-         /*   val navController = this.findNavController(R.id.fragment)
-            binding.bottomNavView.setupWithNavController(navController)
-            binding.bottomNavView.setOnItemReselectedListener { item ->
-                navController.popBackStack(item.itemId, true)*/
-                //TODO убрать отображение меню при регистрации
-
-
         }
     }
 }
